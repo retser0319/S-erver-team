@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 6267fb1892208864a8e2556d95380e90
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 325539
+  packageName: BoxTank-Police
+  packageVersion: 1.0
+  assetPath: Assets/BOXTANK/BoxTank-Police/Scripts/TankTrackComp.cs
+  uploadId: 770809

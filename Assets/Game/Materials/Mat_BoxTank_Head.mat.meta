@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ecac0dbfa3eb7cd44a1b9f49ff1c9cf2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 325539
+  packageName: BoxTank-Police
+  packageVersion: 1.0
+  assetPath: Assets/BOXTANK/BoxTank-Police/ArtRes/Boxtank-01/Materials/Mat_BoxTank_Head.mat
+  uploadId: 770809

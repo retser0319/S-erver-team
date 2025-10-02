@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 219960665a772e54cb89b945de1a4a9e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 325539
+  packageName: BoxTank-Police
+  packageVersion: 1.0
+  assetPath: Assets/BOXTANK/BoxTank-Police/ArtRes/Boxtank-01/Materials/Mat_BoxTank_WheelSmall.mat
+  uploadId: 770809
