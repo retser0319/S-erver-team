@@ -2505,6 +2505,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e1ecf6b062fbd248a32028e6ef85fcd, type: 3}
+--- !u!4 &1179476444 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7925104301027504732, guid: 686797f03c9e6594abff429cbc00e4fb, type: 3}
+  m_PrefabInstance: {fileID: 2102182244}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1193687705 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1595882034050540249, guid: 2e1ecf6b062fbd248a32028e6ef85fcd, type: 3}
@@ -4463,13 +4468,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823688464}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2588191, y: -0, z: -0, w: 0.9659258}
-  m_LocalPosition: {x: 2.32, y: 12.29, z: -6.4}
+  m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
+  m_LocalPosition: {x: 0, y: 18, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!114 &1823688468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4803,7 +4808,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889312958}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4820,7 +4825,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &1889312962
 MonoBehaviour:
@@ -4834,9 +4839,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c8894f2bfb8814c9f241fbf6800f8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tank_Move
+  cam: {fileID: 1823688466}
+  head: {fileID: 1179476444}
   speed: 10
   rotationSpeed: 100
-  jumpForce: 10
+  jumpForce: 80
+  jump: 0
 --- !u!65 &1889312964
 BoxCollider:
   m_ObjectHideFlags: 0
