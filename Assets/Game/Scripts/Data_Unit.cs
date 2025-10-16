@@ -24,7 +24,7 @@ public class Fortress : Unit
 {
     Skill[] skill;
 
-    public Fortress() : base()
+    public Fortress() : base("Defenser")
     {
         skill = new Skill[4];
     }

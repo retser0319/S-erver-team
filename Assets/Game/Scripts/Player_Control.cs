@@ -43,7 +43,7 @@ public class Player_Control : MonoBehaviour
     }
     private void CameraPosition()
     {
-        cam.transform.position = new Vector3(transform.position.x, transform.position.y + 16, transform.position.z - 8);
+        cam.transform.position = new Vector3(transform.position.x, transform.position.y + 16, transform.position.z - 12);
     }
     private void Move(float v)
     {
