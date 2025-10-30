@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Player_Control : MonoBehaviour
 {
-    [SerializeField] Camera cam;
-    [SerializeField] Transform head;
+    [SerializeField] private Camera cam;
+    [SerializeField] public Transform head;
     private Rigidbody rb;
 
     // юс╫ц
@@ -38,12 +38,13 @@ public class Player_Control : MonoBehaviour
         Move(v);
         Turn(h);
 
+        if (cam == null) return;
         HeadRot();
         CameraPosition();
     }
     private void CameraPosition()
     {
-        cam.transform.position = new Vector3(transform.position.x, transform.position.y + 16, transform.position.z - 12);
+        cam.transform.position = new Vector3(transform.position.x, transform.position.y + 24, transform.position.z - 12);
     }
     private void Move(float v)
     {
