@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEditor.Progress;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class Stats_Fortress : MonoBehaviour
 {
@@ -16,11 +17,13 @@ public class Stats_Fortress : MonoBehaviour
     private float skillTimer;
 
     private bool skillRangeView;
+    private bool turretMode;
 
     private void Awake()
     {
         stats = new Unit("Fortress");
         skillRangeView = false;
+        turretMode = false;
 
         attackTimer = 0f;
         skillTimer = 10f;
@@ -30,11 +33,18 @@ public class Stats_Fortress : MonoBehaviour
         attackTimer += Time.deltaTime;
         skillTimer += Time.deltaTime;
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            turretMode = !turretMode;
+            control.Hold();
+        }
+
         if (stats.CheckCanDefaultAttack(attackTimer) && Input.GetMouseButtonDown(0) && !skillRangeView)
         {
             Default_Attack();
             attackTimer = 0f;
         }
+        
         if (stats.CheckCanSkill(skillTimer) && Input.GetKeyDown(KeyCode.E))
         {
             skillRangeView = !skillRangeView;
@@ -67,4 +77,6 @@ public class Stats_Fortress : MonoBehaviour
         var obj = Instantiate(bullet, control.head.transform.position, control.head.transform.rotation);
         obj.GetComponent<Bullet>().Setting(gameObject, stats.attackDamage, 20, 1);
     }
+
+    
 }
