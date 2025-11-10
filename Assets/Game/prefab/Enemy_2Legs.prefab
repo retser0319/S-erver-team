@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b76d50051eb163d489766455a5587647, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.62
+      value: 26.83
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b76d50051eb163d489766455a5587647, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 4.11
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b76d50051eb163d489766455a5587647, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.34
+      value: 22.93
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b76d50051eb163d489766455a5587647, type: 3}
       propertyPath: m_LocalRotation.w
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee5288c63ecafe4cb14d4f0002ec877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nav
-  moveSpeed: 1
+  moveSpeed: 5
   navMeshAgent: {fileID: 4326542896283829946}
 --- !u!114 &2109970289859314377
 MonoBehaviour:
