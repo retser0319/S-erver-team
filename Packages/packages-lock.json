@@ -11,7 +11,11 @@
     },
     "com.unity.burst": {
       "version": "1.8.24",
+<<<<<<< Updated upstream
       "depth": 2,
+=======
+      "depth": 1,
+>>>>>>> Stashed changes
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
@@ -230,7 +234,11 @@
     },
     "com.unity.test-framework.performance": {
       "version": "3.1.0",
+<<<<<<< Updated upstream
       "depth": 3,
+=======
+      "depth": 2,
+>>>>>>> Stashed changes
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.1.33",

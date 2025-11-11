@@ -19,6 +19,7 @@ public class Unit
         moveSpeed = 10;
     }
 }
+<<<<<<< Updated upstream
 
 public class Fortress : Unit
 {
@@ -29,3 +30,5 @@ public class Fortress : Unit
         skill = new Skill[4];
     }
 }
+=======
+>>>>>>> Stashed changes

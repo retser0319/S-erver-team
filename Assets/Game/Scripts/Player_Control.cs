@@ -35,11 +35,29 @@ public class Player_Control : MonoBehaviour
         float v = Input.GetAxis("Vertical");   // W/S, ↑/↓
         float h = Input.GetAxis("Horizontal"); // A/D, ←/→
 
+<<<<<<< Updated upstream
         Move(v);
         Turn(h);
 
         HeadRot();
         CameraPosition();
+=======
+        if (jumpDelay <= 0 && IsGrounded()) // 지면에 붙어있을때만 점프
+        {
+            jump = false;
+        }
+        if (!hold) // 고정모드가 아닐때,
+        {
+            Move(v); // 이동
+            Turn(h); // 몸통 회전
+        }
+
+        if (cam != null)
+        {
+            HeadRot(); // 포탑 회전
+            CameraPosition(); // 카메라 이동
+        }
+>>>>>>> Stashed changes
     }
     private void CameraPosition()
     {
