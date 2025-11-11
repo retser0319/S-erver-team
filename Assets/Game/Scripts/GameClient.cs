@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -9,10 +10,37 @@ public class GameClient : MonoBehaviour
     TcpClient client;
     NetworkStream stream;
     Thread receiveThread;
+    volatile bool running;
+
+    [Header("Chat UI")]
+    public ChatUI chatUI;
+
+    private readonly ConcurrentQueue<string> inbox = new ConcurrentQueue<string>();
+    private readonly StringBuilder recvBuffer = new StringBuilder();
 
     void Start()
     {
         ConnectToServer("127.0.0.1", 9000);
+    }
+
+    void Update()
+    {
+        while (inbox.TryDequeue(out var line))
+        {
+            chatUI?.Append(line);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            if (chatUI != null)
+            {
+                var msg = chatUI.ConsumeInput();
+                if (!string.IsNullOrWhiteSpace(msg))
+                {
+                    SendMessageToServer(msg);
+                }
+            }
+        }
     }
 
     void ConnectToServer(string ip, int port)
@@ -22,59 +50,87 @@ public class GameClient : MonoBehaviour
             client = new TcpClient();
             client.Connect(ip, port);
             stream = client.GetStream();
-            Debug.Log("[CLIENT] Connected to server!");
+            running = true;
 
-            // 수신 전용 스레드 시작
-            receiveThread = new Thread(ReceiveData);
+            Debug.Log("[CLIENT] Connected to server!");
+            chatUI?.Append("[SYSTEM] Connected to server.");
+
+            receiveThread = new Thread(ReceiveLoop) { IsBackground = true };
             receiveThread.Start();
         }
         catch (Exception e)
         {
             Debug.LogError($"[CLIENT] Connection failed: {e.Message}");
+            chatUI?.Append($"[SYSTEM] Connection failed: {e.Message}");
         }
     }
 
-    void ReceiveData()
+    void ReceiveLoop()
     {
+        byte[] buffer = new byte[2048];
         try
         {
-            byte[] buffer = new byte[1024];
-            while (true)
+            while (running)
             {
                 int bytesRead = stream.Read(buffer, 0, buffer.Length);
                 if (bytesRead <= 0)
                 {
-                    Debug.LogWarning("[CLIENT] Disconnected from server.");
+                    inbox.Enqueue("[SYSTEM] Disconnected from server.");
                     break;
                 }
 
-                string msg = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                Debug.Log($"[SERVER] {msg}");
+
+                string chunk = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                recvBuffer.Append(chunk);
+
+                int newline;
+                while ((newline = recvBuffer.ToString().IndexOf('\n')) >= 0)
+                {
+                    string line = recvBuffer.ToString(0, newline).TrimEnd('\r');
+                    inbox.Enqueue(line);
+                    recvBuffer.Remove(0, newline + 1);
+                }
             }
         }
         catch (Exception e)
         {
-            Debug.LogError($"[CLIENT] Receive error: {e.Message}");
+            inbox.Enqueue($"[SYSTEM] Receive error: {e.Message}");
+        }
+        finally
+        {
+            running = false;
+        }
+    }
+
+    public void SendFromButton()
+    {
+        if (chatUI == null) return;
+        var msg = chatUI.ConsumeInput();
+        if (!string.IsNullOrWhiteSpace(msg))
+        {
+            SendMessageToServer(msg);
         }
     }
 
     public void SendMessageToServer(string msg)
     {
-        if (stream == null) return;
-
-        byte[] data = Encoding.UTF8.GetBytes(msg + "\n");
-        stream.Write(data, 0, data.Length);
-        Debug.Log($"[CLIENT] Sent: {msg}");
+        if (stream == null || !stream.CanWrite) return;
+        try
+        {
+            byte[] data = Encoding.UTF8.GetBytes(msg + "\n");
+            stream.Write(data, 0, data.Length);
+        }
+        catch (Exception e)
+        {
+            inbox.Enqueue($"[SYSTEM] Send error: {e.Message}");
+        }
     }
 
     void OnApplicationQuit()
     {
-        try
-        {
-            stream?.Close();
-            client?.Close();
-            receiveThread?.Abort();
-        }
-        catch { }
+        running = false;
+        try { stream?.Close(); } catch { }
+        try { client?.Close(); } catch { }
+        try { receiveThread?.Join(200); } catch { }
     }
 }
