@@ -42,8 +42,8 @@ public class Player_Control : MonoBehaviour
         }
         if (!hold)
         {
-            Move(v);
-            Turn(h);
+            Move(h, v);
+            Turn(h, v);
         }
 
         if (cam != null)
@@ -56,15 +56,18 @@ public class Player_Control : MonoBehaviour
     {
         cam.transform.position = new Vector3(transform.position.x, transform.position.y + 24, transform.position.z - 12);
     }
-    private void Move(float v)
+    private void Move(float h, float v)
     {
-        Vector3 move = transform.forward * v;
-        rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);
+        Vector3 movePos = new Vector3(h, 0, v);
+        rb.MovePosition(rb.position + movePos * speed * Time.fixedDeltaTime);
     }
-    private void Turn(float h)
+    private void Turn(float h, float v)
     {
-        Quaternion rot = Quaternion.Euler(0, h * rotationSpeed * Time.fixedDeltaTime, 0);
-        rb.MoveRotation(rb.rotation * rot);
+        if (h == 0 && v == 0) return;
+        Vector3 inputDir = new Vector3(h, 0, v);
+
+        Quaternion targetRot = Quaternion.LookRotation(inputDir);
+        rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRot, rotationSpeed * Time.fixedDeltaTime));
     }
     private void HeadRot()
     {
