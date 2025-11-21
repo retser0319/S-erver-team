@@ -17,32 +17,30 @@ public class Ctl_Player : MonoBehaviour
 
     bool wallMode = false;
     GameObject bluePrint;
-    private void Update()
+    private void LateUpdate()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (wallMode && gameManager.round_in_progress)
+            // 벽 설치
+            if (wallMode && !gameManager.round_in_progress)
             {
-                wallMode = false;
-                Destroy(bluePrint);
-            }
-            else if (wallMode && !gameManager.round_in_progress)
                 tileManager.TileChange((int)bluePrint.transform.position.x, (int)bluePrint.transform.position.y, 1);
-            else
+            }
+            // 라운드 시작시 공격가능
+            else if (gameManager.round_in_progress)
+            {
                 Instantiate(bullet, transform.position, transform.rotation);
+            }
+
+            if (wallMode)
+            {
+                ChangeWallMode();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.E) && !gameManager.round_in_progress)
         {
-            wallMode = !wallMode;
-            if (wallMode)
-            {
-                bluePrint = Instantiate(BF_wall);
-            }
-            else
-            {
-                Destroy(bluePrint);
-            }
+            ChangeWallMode();
         }
     }
     void FixedUpdate()
@@ -59,6 +57,18 @@ public class Ctl_Player : MonoBehaviour
         }
     }
 
+    private void ChangeWallMode() {
+        wallMode = !wallMode;
+        if (wallMode)
+        {
+            bluePrint = Instantiate(BF_wall);
+            BF_Follow();
+        }
+        else
+        {
+            Destroy(bluePrint);
+        }
+    }
     private void Move(float x, float y)
     {
         if (xSpeed < speed) xSpeed += x * Time.deltaTime;
@@ -67,14 +77,14 @@ public class Ctl_Player : MonoBehaviour
         xSpeed *= 0.9f;
         ySpeed *= 0.9f;
 
-        transform.position = new Vector2(transform.position.x + xSpeed, transform.position.y + ySpeed);
+        transform.position += new Vector3(xSpeed, ySpeed, 0f);
     }
     private void LookMouse()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePos - (Vector2)transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, angle);
     }
     private void BF_Follow()
     {

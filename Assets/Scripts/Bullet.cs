@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    float speed = 20f;
+    public int damage;
+    public float speed;
 
     private void Awake()
     {
@@ -20,7 +21,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.collider.CompareTag("Enemy"))
         {
-            collision.collider.GetComponent<Enemy>().health -= 3;
+            collision.collider.GetComponent<Enemy>().health -= damage;
             Destroy(gameObject);  // 자기 자신 삭제
         }
     }

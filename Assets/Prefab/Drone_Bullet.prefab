@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3174165669796189931}
   - component: {fileID: 5407108561875495427}
   m_Layer: 12
-  m_Name: Bullet
+  m_Name: Drone_Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,6 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af090a4a9dd1f2a43b01cae3497835ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
+  speed: 40
 --- !u!50 &5407108561875495427
 Rigidbody2D:
   serializedVersion: 5

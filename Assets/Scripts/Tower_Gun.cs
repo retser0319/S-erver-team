@@ -13,9 +13,9 @@ public class Tower_Gun : MonoBehaviour
 
     */
     [SerializeField] GameObject bullet;
-    public int attackDamage;
     public int attackCount;
     public float attackSpeed;
+    public float accuracy;
     float attackDelay;
     float interval;
 
@@ -53,6 +53,11 @@ public class Tower_Gun : MonoBehaviour
     }
     private void Attack()
     {
-        Instantiate(bullet, transform.position, transform.rotation);
+        for (int i = 0; i < attackCount; i++)
+        {
+            Quaternion rotation = transform.rotation * Quaternion.Euler(0f, 0f, Random.Range(-accuracy, accuracy));
+
+            Instantiate(bullet, transform.position, rotation);
+        }
     }
 }

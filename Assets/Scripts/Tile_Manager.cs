@@ -11,7 +11,9 @@ public class Tile
 }
 public class Tile_Manager : MonoBehaviour
 {
+    [SerializeField] private Game_Manager gameManager;
     [SerializeField] private GameObject[] bluePrint;
+    [SerializeField] private RectTransform UI_tower_info;
     public GameObject[,] map;
     public Tile[,] tiles;
     public int ySize, xSize;
@@ -25,17 +27,36 @@ public class Tile_Manager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0)) Click();
+        if (Input.GetMouseButtonDown(0) && !gameManager.round_in_progress) Click();
     }
 
     private void Click()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-        // 태그로 벽만
-        if (selectedTile != null) selectedTile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
-        if (hit.collider != null) selectedTile = hit.transform.gameObject;
-        selectedTile.GetComponent<SpriteRenderer>().color = new Color(0.5f,0.5f,0.5f);
+
+        if (hit.collider != null && hit.collider.CompareTag("Wall"))
+        {
+            if (selectedTile != null) 
+                selectedTile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+
+            selectedTile = hit.transform.gameObject;
+            selectedTile.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
+            UI_tower_info.transform.position = selectedTile.transform.position;
+            UI_tower_info.gameObject.SetActive(true);
+        }
+        else
+        {
+            ResetSelectedTile();
+        }
+    }
+    public void ResetSelectedTile()
+    {
+        if (selectedTile != null)
+            selectedTile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+
+        selectedTile = null;
+        UI_tower_info.gameObject.SetActive(false);
     }
     private void MapSetting()
     {
@@ -69,13 +90,5 @@ public class Tile_Manager : MonoBehaviour
     {
         Destroy(map[y,x]);
         map[y, x] = Instantiate(bluePrint[id],new Vector2(x, y),Quaternion.identity, transform);
-
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        // 예: 각 오브젝트 위치 출력
-        foreach (GameObject enemy in enemies)
-        {
-            enemy.GetComponent<Nav_AI>().Find();
-        }
     }
 }

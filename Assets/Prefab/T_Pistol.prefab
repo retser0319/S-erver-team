@@ -10,11 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7194211467496667663}
   - component: {fileID: 3357783922556407901}
-  - component: {fileID: 4856349106722338167}
-  - component: {fileID: -1527158388804758813}
   - component: {fileID: 6775560642619809596}
   m_Layer: 7
-  m_Name: Tower
+  m_Name: T_Pistol
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 34.03395, y: 2.9760985, z: 0}
-  m_LocalScale: {x: 1, y: 0.5, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8483572319731588335}
   m_Father: {fileID: 0}
@@ -83,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0.1774059, g: 0.80878526, b: 0.8679245, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,69 +92,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &4856349106722338167
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7208208867571571363}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
---- !u!50 &-1527158388804758813
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7208208867571571363}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &6775560642619809596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,10 +104,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b51f8f7ebb76fc64fb4caa61b5fe236f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower_Gun
-  bullet: {fileID: 4731624869876710915, guid: a518bc3657a28934cb55e9d414d5d9c8, type: 3}
-  attackDamage: 3
+  bullet: {fileID: 4731624869876710915, guid: 0d659d6458eb7ac4e9cf571ac6bc3a27, type: 3}
   attackCount: 1
-  attackSpeed: 3
+  attackSpeed: 0.8
+  accuracy: 0
 --- !u!1 &9170652584890786278
 GameObject:
   m_ObjectHideFlags: 0
