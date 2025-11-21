@@ -32,7 +32,10 @@ public class Tile_Manager : MonoBehaviour
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+        // 태그로 벽만
+        if (selectedTile != null) selectedTile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
         if (hit.collider != null) selectedTile = hit.transform.gameObject;
+        selectedTile.GetComponent<SpriteRenderer>().color = new Color(0.5f,0.5f,0.5f);
     }
     private void MapSetting()
     {

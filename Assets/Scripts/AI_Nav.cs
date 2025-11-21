@@ -8,7 +8,10 @@ public class Nav_AI : MonoBehaviour
 {
     [SerializeField] float size;
     [SerializeField] float moveSpeed = 2f; // 이동 속도
-    [SerializeField] Tile_Manager tileManager;
+
+    public float distance;
+
+    Tile_Manager tileManager;
     List<Node> path;
 
     int currentNodeIndex = 0; // 현재 목표 노드 인덱스
@@ -26,6 +29,7 @@ public class Nav_AI : MonoBehaviour
     {
         if (path == null || path.Count == 0) return;
         MoveAlongPath();
+        GetRemainingDistance();
     }
     public void Find()
     {
@@ -55,6 +59,22 @@ public class Nav_AI : MonoBehaviour
         if (Vector2.Distance(newPos, targetPos) < 0.05f)
         {
             currentNodeIndex++;
+        }
+    }
+    private void GetRemainingDistance()
+    {
+        if (path == null || path.Count == 0) return;
+        if (currentNodeIndex >= path.Count) return;
+        distance = 0;
+        // 1. 현재 위치 → 다음 목표 노드까지의 거리
+        Vector2 currentPos = transform.position;
+        Vector2 targetPos = path[currentNodeIndex].pos;
+        distance += Vector2.Distance(currentPos, targetPos);
+
+        // 2. 다음 노드부터 마지막 노드까지의 거리
+        for (int i = currentNodeIndex; i < path.Count - 1; i++)
+        {
+            distance += Vector2.Distance(path[i].pos, path[i + 1].pos);
         }
     }
     public List<Node> FindPathOptimized(Vector2 start, Vector2 end)
@@ -117,7 +137,6 @@ public class Nav_AI : MonoBehaviour
         Debug.Log("경로 없음");
         return null;
     }
-
     private List<Node> BuildPath(Node endNode)
     {
         List<Node> path = new List<Node>();
@@ -150,7 +169,6 @@ public class Nav_AI : MonoBehaviour
         RaycastHit2D hit = Physics2D.CircleCast(a, size, dir, distance, LayerMask.GetMask("Wall"));
         return hit.collider != null;
     }
-
 
     void OnDrawGizmos()
     {
