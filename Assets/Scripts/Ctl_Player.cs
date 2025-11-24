@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class Ctl_Player : MonoBehaviour
 {
     [SerializeField] Game_Manager gameManager;
+    [SerializeField] Round_Manager roundManager;
     [SerializeField] Tile_Manager tileManager;
     [SerializeField] GameObject BF_wall;
     [SerializeField] GameObject bullet;
@@ -22,12 +23,12 @@ public class Ctl_Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // 벽 설치
-            if (wallMode && !gameManager.round_in_progress)
+            if (wallMode && !roundManager.round_in_progress)
             {
                 tileManager.TileChange((int)bluePrint.transform.position.x, (int)bluePrint.transform.position.y, 1);
             }
             // 라운드 시작시 공격가능
-            else if (gameManager.round_in_progress)
+            else if (roundManager.round_in_progress)
             {
                 Instantiate(bullet, transform.position, transform.rotation);
             }
@@ -38,7 +39,7 @@ public class Ctl_Player : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && !gameManager.round_in_progress)
+        if (Input.GetKeyDown(KeyCode.E) && !roundManager.round_in_progress)
         {
             ChangeWallMode();
         }

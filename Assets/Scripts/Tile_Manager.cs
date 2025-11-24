@@ -12,6 +12,7 @@ public class Tile
 public class Tile_Manager : MonoBehaviour
 {
     [SerializeField] private Game_Manager gameManager;
+    [SerializeField] private Round_Manager roundManager;
     [SerializeField] private GameObject[] bluePrint;
     [SerializeField] private RectTransform UI_tower_info;
     public GameObject[,] map;
@@ -27,7 +28,7 @@ public class Tile_Manager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !gameManager.round_in_progress) Click();
+        if (Input.GetMouseButtonDown(0) && !roundManager.round_in_progress) Click();
     }
 
     private void Click()

@@ -3314,11 +3314,15 @@ PrefabInstance:
     - target: {fileID: 173282110143319484, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
       propertyPath: gameManager
       value: 
-      objectReference: {fileID: 571674330}
+      objectReference: {fileID: 968173336}
     - target: {fileID: 173282110143319484, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
       propertyPath: tileManager
       value: 
       objectReference: {fileID: 571674328}
+    - target: {fileID: 173282110143319484, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
+      propertyPath: roundManager
+      value: 
+      objectReference: {fileID: 968173335}
     - target: {fileID: 3357783922556407901, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -3333,11 +3337,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7194211467496667663, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.1
+      value: 3.07
       objectReference: {fileID: 0}
     - target: {fileID: 7194211467496667663, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.52
+      value: 5.13
       objectReference: {fileID: 0}
     - target: {fileID: 7194211467496667663, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5356,7 +5360,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17, y: 2, z: -10}
+  m_LocalPosition: {x: 17, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5712,7 +5716,6 @@ GameObject:
   m_Component:
   - component: {fileID: 571674329}
   - component: {fileID: 571674328}
-  - component: {fileID: 571674330}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -5732,7 +5735,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55406a66d12081949b51efac35cf54a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 571674330}
+  gameManager: {fileID: 968173336}
+  roundManager: {fileID: 968173335}
   bluePrint:
   - {fileID: 4305958609066974094, guid: e3d7194f3896ba744b8808fc9ae3bba8, type: 3}
   - {fileID: 4305958609066974094, guid: 6aa70ee0fa4ae7c40afc29c1af5bdeec, type: 3}
@@ -6070,26 +6074,6 @@ Transform:
   - {fileID: 1654458534}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &571674330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571674327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe28cf7d9bba823429ae6222b32fc085, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileManager: {fileID: 571674328}
-  Towers:
-  - {fileID: 7208208867571571363, guid: 3c526c8185cf88743a5a52c302fdcad3, type: 3}
-  - {fileID: 7208208867571571363, guid: 630404057e1953542b482c7d9b12fa56, type: 3}
-  - {fileID: 7208208867571571363, guid: 7dd1412131abfe8479767597f5197e83, type: 3}
-  - {fileID: 7208208867571571363, guid: ad83a1309b7590141b219f400947733c, type: 3}
-  Enemy: {fileID: 7208208867571571363, guid: 4aab0a55c88cbd342bed34ab381030a4, type: 3}
-  round_in_progress: 0
 --- !u!4 &572965703 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6687692074992650140, guid: e3d7194f3896ba744b8808fc9ae3bba8, type: 3}
@@ -6496,7 +6480,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 571674330}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Game_Manager, Assembly-CSharp
         m_MethodName: RemoveTower
         m_Mode: 1
@@ -8500,7 +8484,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 571674330}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Game_Manager, Assembly-CSharp
         m_MethodName: CreateRandomTower
         m_Mode: 1
@@ -8720,11 +8704,15 @@ PrefabInstance:
     - target: {fileID: 173282110143319484, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
       propertyPath: gameManager
       value: 
-      objectReference: {fileID: 571674330}
+      objectReference: {fileID: 968173336}
     - target: {fileID: 173282110143319484, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
       propertyPath: tileManager
       value: 
       objectReference: {fileID: 571674328}
+    - target: {fileID: 173282110143319484, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
+      propertyPath: roundManager
+      value: 
+      objectReference: {fileID: 968173335}
     - target: {fileID: 3357783922556407901, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -8739,11 +8727,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7194211467496667663, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.96
+      value: 3.09
       objectReference: {fileID: 0}
     - target: {fileID: 7194211467496667663, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.21
+      value: 7.24
       objectReference: {fileID: 0}
     - target: {fileID: 7194211467496667663, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10383,6 +10371,73 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6687692074992650140, guid: e3d7194f3896ba744b8808fc9ae3bba8, type: 3}
   m_PrefabInstance: {fileID: 447766363}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &968173334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 968173337}
+  - component: {fileID: 968173336}
+  - component: {fileID: 968173335}
+  m_Layer: 0
+  m_Name: Game_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &968173335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968173334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb19bdd4e72db5d498062a4186cc641a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Round_Manager
+  enemy: {fileID: 7208208867571571363, guid: 4aab0a55c88cbd342bed34ab381030a4, type: 3}
+  round_in_progress: 0
+  round: 0
+--- !u!114 &968173336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968173334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe28cf7d9bba823429ae6222b32fc085, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileManager: {fileID: 571674328}
+  roundManager: {fileID: 968173335}
+  Towers:
+  - {fileID: 7208208867571571363, guid: 3c526c8185cf88743a5a52c302fdcad3, type: 3}
+  - {fileID: 7208208867571571363, guid: 630404057e1953542b482c7d9b12fa56, type: 3}
+  - {fileID: 7208208867571571363, guid: 7dd1412131abfe8479767597f5197e83, type: 3}
+  - {fileID: 7208208867571571363, guid: ad83a1309b7590141b219f400947733c, type: 3}
+--- !u!4 &968173337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968173334}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.8916, y: 3.35353, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &970522408 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6687692074992650140, guid: e3d7194f3896ba744b8808fc9ae3bba8, type: 3}
@@ -13111,8 +13166,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 571674330}
-        m_TargetAssemblyTypeName: Game_Manager, Assembly-CSharp
+      - m_Target: {fileID: 968173335}
+        m_TargetAssemblyTypeName: Round_Manager, Assembly-CSharp
         m_MethodName: RoundStart
         m_Mode: 1
         m_Arguments:
@@ -20872,11 +20927,15 @@ PrefabInstance:
     - target: {fileID: 173282110143319484, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
       propertyPath: gameManager
       value: 
-      objectReference: {fileID: 571674330}
+      objectReference: {fileID: 968173336}
     - target: {fileID: 173282110143319484, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
       propertyPath: tileManager
       value: 
       objectReference: {fileID: 571674328}
+    - target: {fileID: 173282110143319484, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
+      propertyPath: roundManager
+      value: 
+      objectReference: {fileID: 968173335}
     - target: {fileID: 3357783922556407901, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -21057,3 +21116,4 @@ SceneRoots:
   - {fileID: 820335984}
   - {fileID: 571674329}
   - {fileID: 1245318471}
+  - {fileID: 968173337}
