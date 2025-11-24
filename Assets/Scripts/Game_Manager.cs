@@ -7,7 +7,10 @@ public class Game_Manager : MonoBehaviour
     [SerializeField] private Tile_Manager tileManager;
     [SerializeField] private Round_Manager roundManager;
     [SerializeField] public GameObject[] Towers;
+<<<<<<< HEAD
 
+=======
+>>>>>>> Test
     public void CreateRandomTower()
     {
         Transform wall = tileManager.selectedTile.transform;
