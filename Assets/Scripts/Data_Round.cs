@@ -40,7 +40,7 @@ public class Data_Round
                 break;
         }
     }
-
+    // basic : 기본, speed : 빠른거, hardness : 단단한거, fly : 날아다니는거, boss_1 : 보스 1, boss_2 : 보스 2
     private void SetRound_1()
     {
         for (int i = 0; i < 10; i++)

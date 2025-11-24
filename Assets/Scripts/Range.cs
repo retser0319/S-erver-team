@@ -21,6 +21,7 @@ public class Range : MonoBehaviour
 
     private void SortByDistanceRemaining()
     {
+        /*
         targets.Sort((a, b) =>
         {
             float distA = a.GetComponent<Nav_AI>().distance;
@@ -28,5 +29,6 @@ public class Range : MonoBehaviour
 
             return distA.CompareTo(distB);
         });
+        */
     }
 }

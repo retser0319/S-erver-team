@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.unity.2d.animation": {
-      "version": "12.0.2",
+      "version": "12.0.3",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -14,7 +14,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.2d.aseprite": {
-      "version": "2.0.1",
+      "version": "2.0.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -40,7 +40,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.2d.pixel-perfect": {
-      "version": "5.1.0",
+      "version": "5.1.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -49,7 +49,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.2d.psdimporter": {
-      "version": "11.0.1",
+      "version": "11.0.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -66,7 +66,7 @@
       "dependencies": {}
     },
     "com.unity.2d.spriteshape": {
-      "version": "12.0.1",
+      "version": "12.0.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -86,7 +86,7 @@
       }
     },
     "com.unity.2d.tilemap.extras": {
-      "version": "5.0.1",
+      "version": "5.0.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -107,11 +107,7 @@
     },
     "com.unity.burst": {
       "version": "1.8.24",
-<<<<<<< Updated upstream
       "depth": 2,
-=======
-      "depth": 1,
->>>>>>> Stashed changes
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
@@ -150,14 +146,14 @@
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.2d.animation": "12.0.2",
-        "com.unity.2d.pixel-perfect": "5.1.0",
-        "com.unity.2d.psdimporter": "11.0.1",
+        "com.unity.2d.animation": "12.0.3",
+        "com.unity.2d.pixel-perfect": "5.1.1",
+        "com.unity.2d.psdimporter": "11.0.2",
         "com.unity.2d.sprite": "1.0.0",
-        "com.unity.2d.spriteshape": "12.0.1",
+        "com.unity.2d.spriteshape": "12.0.2",
         "com.unity.2d.tilemap": "1.0.0",
-        "com.unity.2d.tilemap.extras": "5.0.1",
-        "com.unity.2d.aseprite": "2.0.1"
+        "com.unity.2d.tilemap.extras": "5.0.2",
+        "com.unity.2d.aseprite": "2.0.2"
       }
     },
     "com.unity.ide.rider": {
@@ -271,11 +267,7 @@
     },
     "com.unity.test-framework.performance": {
       "version": "3.1.0",
-<<<<<<< Updated upstream
       "depth": 3,
-=======
-      "depth": 2,
->>>>>>> Stashed changes
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.1.33",
