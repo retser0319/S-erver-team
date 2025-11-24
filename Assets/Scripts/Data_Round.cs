@@ -26,8 +26,6 @@ public class Data_Round
             case 2:
                 SetRound_2();
                 break;
-<<<<<<< HEAD
-=======
             case 3:
                 SetRound_3();
                 break;
@@ -37,7 +35,6 @@ public class Data_Round
             case 5:
                 SetRound_5();
                 break;
->>>>>>> Test
             default:
                 SetRound_1();
                 break;
@@ -54,8 +51,6 @@ public class Data_Round
         for (int i = 0; i < 10; i++)
             data.Add(new SpawnData("basic", 1));
     }
-<<<<<<< HEAD
-=======
     private void SetRound_3()
     {
         for (int i = 0; i < 10; i++)
@@ -71,5 +66,4 @@ public class Data_Round
         for (int i = 0; i < 10; i++)
             data.Add(new SpawnData("basic", 1));
     }
->>>>>>> Test
 }

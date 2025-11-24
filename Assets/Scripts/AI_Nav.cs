@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Nav_AI : MonoBehaviour
 {
-<<<<<<< HEAD
     [SerializeField] float size;
     [SerializeField] float moveSpeed = 2f; // 이동 속도
 
@@ -192,9 +191,6 @@ public class Nav_AI : MonoBehaviour
             }
         }
     }
-=======
-
->>>>>>> Test
 }
 public class Node
 {
