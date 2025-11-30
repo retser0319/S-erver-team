@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1905197282475642691}
   - component: {fileID: 1648655182993710387}
   m_Layer: 8
-  m_Name: Enemy
+  m_Name: Hardness
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.57232696, g: 0.012598298, b: 0.012598298, a: 1}
+  m_Color: {r: 0.25157225, g: 0.25157225, b: 0.25157225, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -170,7 +170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e03625ee185d44f9b345b86e4b6141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 30
+  defense: 0.5
+  speed: 2
 --- !u!114 &1905197282475642691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +194,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7208208867571571363}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50

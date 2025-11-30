@@ -4,9 +4,9 @@ using UnityEngine;
 public class SpawnData
 {
     public string name;
-    public int delay;
+    public float delay;
 
-    public SpawnData(string name, int delay)
+    public SpawnData(string name, float delay)
     {
         this.name = name;
         this.delay = delay;
@@ -44,7 +44,10 @@ public class Data_Round
     private void SetRound_1()
     {
         for (int i = 0; i < 10; i++)
-            data.Add(new SpawnData("basic", 1));
+        {
+            data.Add(new SpawnData("basic", 0.1f));
+            data.Add(new SpawnData("speed", 0.1f));
+        }
     }
     private void SetRound_2()
     {

@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class Round_Manager : MonoBehaviour
 {
-    [SerializeField] public GameObject enemy;
+    [SerializeField] public GameObject[] enemy;
 
     public bool round_in_progress = false;
     public int round = 0;
 
     private float tick = 0;
     private int index = 0;
-    private int delay = 1;
+    private float delay = 1;
 
     private List<SpawnData> data = new List<SpawnData>();
     
-    // Update is called once per frame
     void Update()
     {
-        if (!round_in_progress) return;
+        if (Enemy.count == 0 && data.Count == 0) round_in_progress = false;
+
+        if (data.Count == 0) return;
         tick += Time.deltaTime;
         if (tick > delay)
         {
@@ -36,7 +37,6 @@ public class Round_Manager : MonoBehaviour
             else
             {
                 index = 0;
-                round_in_progress = false;
                 data.Clear();
             }
         }
@@ -56,7 +56,22 @@ public class Round_Manager : MonoBehaviour
         switch (name)
         {
             case "basic":
-                Instantiate(enemy, new Vector2(34, y), Quaternion.identity);
+                Instantiate(enemy[0], new Vector2(34, y), Quaternion.identity);
+                break;
+            case "speed":
+                Instantiate(enemy[1], new Vector2(34, y), Quaternion.identity);
+                break;
+            case "hardness":
+                Instantiate(enemy[2], new Vector2(34, y), Quaternion.identity);
+                break;
+            case "fly":
+                Instantiate(enemy[3], new Vector2(34, y), Quaternion.identity);
+                break;
+            case "boss_1":
+                Instantiate(enemy[4], new Vector2(34, y), Quaternion.identity);
+                break;
+            case "boss_2":
+                Instantiate(enemy[5], new Vector2(34, y), Quaternion.identity);
                 break;
         }
     }
