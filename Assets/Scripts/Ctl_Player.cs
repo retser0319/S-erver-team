@@ -6,50 +6,57 @@ using UnityEngine.UIElements;
 
 public class Ctl_Player : MonoBehaviour
 {
-    [SerializeField] int P;
+    [SerializeField] public int P;
+
     [SerializeField] Game_Manager gameManager;
     [SerializeField] Round_Manager roundManager;
     [SerializeField] Tile_Manager tileManager;
     [SerializeField] GameObject BF_wall;
     [SerializeField] GameObject bullet;
 
-    // Update is called once per frame
     float speed = 3f;
     float xSpeed = 0;
     float ySpeed = 0;
 
     bool wallMode = false;
     GameObject bluePrint;
+    private void Awake()
+    {
+        if (gameManager == null) gameManager = FindObjectOfType<Game_Manager>();
+        if (roundManager == null) roundManager = FindObjectOfType<Round_Manager>();
+        if (tileManager == null) tileManager = FindObjectOfType<Tile_Manager>();
+    }
 
     private void LateUpdate()
     {
+        if (P != GameClient.LocalPlayerId) return;
+
         if (Input.GetMouseButtonDown(0))
         {
-            // 벽 설치
             if (wallMode && !roundManager.round_in_progress)
             {
-                tileManager.TileChange((int)bluePrint.transform.position.x, (int)bluePrint.transform.position.y, 1);
+                tileManager.TileChange((int)bluePrint.transform.position.x,
+                                       (int)bluePrint.transform.position.y,
+                                       1);
             }
-            // 라운드 시작시 공격가능
             else if (roundManager.round_in_progress)
             {
                 Instantiate(bullet, transform.position, transform.rotation);
             }
 
             if (wallMode)
-            {
                 ChangeWallMode();
-            }
         }
 
         if (Input.GetKeyDown(KeyCode.E) && !roundManager.round_in_progress)
-        {
             ChangeWallMode();
-        }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
+        if (GameClient.LocalPlayerId > 0 && P != GameClient.LocalPlayerId)
+            return;
+
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
@@ -57,8 +64,12 @@ public class Ctl_Player : MonoBehaviour
         LookMouse();
 
         if (wallMode)
-        {
             BF_Follow();
+
+        if (GameClient.Instance != null)
+        {
+            float angleZ = transform.eulerAngles.z;
+            GameClient.Instance.SendPosition(P, transform.position, angleZ);
         }
     }
 
@@ -78,8 +89,8 @@ public class Ctl_Player : MonoBehaviour
 
     private void Move(float x, float y)
     {
-        if (xSpeed < speed) xSpeed += x * Time.deltaTime;
-        if (ySpeed < speed) ySpeed += y * Time.deltaTime;
+        xSpeed += x * Time.deltaTime;
+        ySpeed += y * Time.deltaTime;
 
         xSpeed *= 0.9f;
         ySpeed *= 0.9f;
@@ -92,7 +103,7 @@ public class Ctl_Player : MonoBehaviour
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePos - (Vector2)transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, angle);
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     private void BF_Follow()
@@ -100,7 +111,7 @@ public class Ctl_Player : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.x = (int)(mousePos.x + 0.5f);
         mousePos.y = (int)(mousePos.y + 0.5f);
-        mousePos.z = 0f; // 2D용
+        mousePos.z = 0f;
         bluePrint.transform.position = mousePos;
     }
 
@@ -113,4 +124,3 @@ public class Ctl_Player : MonoBehaviour
         }
     }
 }
-
