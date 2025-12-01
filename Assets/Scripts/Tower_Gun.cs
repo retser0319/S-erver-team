@@ -10,7 +10,7 @@ public class Tower_Gun : MonoBehaviour
     ±â°üÃÑ
     ¼¦°Ç
     ´ëÆ÷
-
+    Àú°ÝÃÑ
     */
     [SerializeField] GameObject bullet;
     public int attackCount;
@@ -19,14 +19,13 @@ public class Tower_Gun : MonoBehaviour
     float attackDelay;
     float interval;
 
-    Range range;
+    public GameObject head;
+    public Range range;
 
     void Start()
     {
         interval = 1f / attackSpeed;
         attackDelay = Time.time;
-
-        range = transform.Find("Range").GetComponent<Range>();
     }
 
     // Update is called once per frame
@@ -49,13 +48,13 @@ public class Tower_Gun : MonoBehaviour
     {
         Vector2 direction = (Vector2)range.targets[0].transform.position - (Vector2)transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        head.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
     private void Attack()
     {
         for (int i = 0; i < attackCount; i++)
         {
-            Quaternion rotation = transform.rotation * Quaternion.Euler(0f, 0f, Random.Range(-accuracy, accuracy));
+            Quaternion rotation = head.transform.rotation * Quaternion.Euler(0f, 0f, Random.Range(-accuracy, accuracy));
 
             Instantiate(bullet, transform.position, rotation);
         }

@@ -23,8 +23,6 @@ public class Ctl_Player : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!isLocal) return;
-
         if (Input.GetMouseButtonDown(0))
         {
             // 벽 설치
@@ -52,8 +50,6 @@ public class Ctl_Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isLocal) return;
-
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 

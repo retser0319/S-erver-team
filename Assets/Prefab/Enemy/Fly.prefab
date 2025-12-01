@@ -33,7 +33,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 34.03395, y: 2.9760985, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -170,9 +170,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e03625ee185d44f9b345b86e4b6141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coin: {fileID: 5772770156228202843, guid: 9d7ab105a84e0954790a677526d82173, type: 3}
   health: 15
   defense: 0
   speed: 4
+  income: 2
 --- !u!114 &1905197282475642691
 MonoBehaviour:
   m_ObjectHideFlags: 0
