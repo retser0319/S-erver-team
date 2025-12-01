@@ -12,6 +12,7 @@ public class Ctl_Player : MonoBehaviour
     [SerializeField] Tile_Manager tileManager;
     [SerializeField] GameObject BF_wall;
     [SerializeField] GameObject bullet;
+
     // Update is called once per frame
     float speed = 3f;
     float xSpeed = 0;
@@ -19,16 +20,19 @@ public class Ctl_Player : MonoBehaviour
 
     bool wallMode = false;
     GameObject bluePrint;
+
     private void LateUpdate()
     {
+        if (!isLocal) return;
+
         if (Input.GetMouseButtonDown(0))
         {
-            // ∫Æ º≥ƒ°
+            // Î≤Ω ÏÑ§Ïπò
             if (wallMode && !roundManager.round_in_progress)
             {
                 tileManager.TileChange((int)bluePrint.transform.position.x, (int)bluePrint.transform.position.y, 1);
             }
-            // ∂ÛøÓµÂ Ω√¿€Ω√ ∞¯∞›∞°¥…
+            // ÎùºÏö¥Îìú ÏãúÏûëÏãú Í≥µÍ≤©Í∞ÄÎä•
             else if (roundManager.round_in_progress)
             {
                 Instantiate(bullet, transform.position, transform.rotation);
@@ -45,8 +49,11 @@ public class Ctl_Player : MonoBehaviour
             ChangeWallMode();
         }
     }
+
     void FixedUpdate()
     {
+        if (!isLocal) return;
+
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
@@ -59,7 +66,8 @@ public class Ctl_Player : MonoBehaviour
         }
     }
 
-    private void ChangeWallMode() {
+    private void ChangeWallMode()
+    {
         wallMode = !wallMode;
         if (wallMode)
         {
@@ -71,6 +79,7 @@ public class Ctl_Player : MonoBehaviour
             Destroy(bluePrint);
         }
     }
+
     private void Move(float x, float y)
     {
         if (xSpeed < speed) xSpeed += x * Time.deltaTime;
@@ -81,6 +90,7 @@ public class Ctl_Player : MonoBehaviour
 
         transform.position += new Vector3(xSpeed, ySpeed, 0f);
     }
+
     private void LookMouse()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -88,12 +98,13 @@ public class Ctl_Player : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, angle);
     }
+
     private void BF_Follow()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.x = (int)(mousePos.x + 0.5f);
         mousePos.y = (int)(mousePos.y + 0.5f);
-        mousePos.z = 0f; // 2DøÎ
+        mousePos.z = 0f; // 2DÏö©
         bluePrint.transform.position = mousePos;
     }
 
@@ -106,3 +117,4 @@ public class Ctl_Player : MonoBehaviour
         }
     }
 }
+
