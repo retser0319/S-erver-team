@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 public class Ctl_Player : MonoBehaviour
 {
+    [SerializeField] int P;
     [SerializeField] Game_Manager gameManager;
     [SerializeField] Round_Manager roundManager;
     [SerializeField] Tile_Manager tileManager;
@@ -94,5 +95,14 @@ public class Ctl_Player : MonoBehaviour
         mousePos.y = (int)(mousePos.y + 0.5f);
         mousePos.z = 0f; // 2D¿ë
         bluePrint.transform.position = mousePos;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Coin"))
+        {
+            Destroy(collision.gameObject);
+            gameManager.AddCoin(P, 1);
+        }
     }
 }
