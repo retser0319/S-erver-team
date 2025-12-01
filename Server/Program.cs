@@ -133,14 +133,19 @@ class GameServer
             {
                 string line = raw.Trim();
 
-                // 🔹 클라이언트가 QUIT 보낸 경우: 바로 종료 처리
                 if (line == "QUIT")
                 {
                     Console.WriteLine($"[SERVER] Player {player.Slot} sent QUIT");
                     Disconnect(player);
-                    return; // 이 플레이어에 대한 수신 루프 종료
+                    return;
                 }
 
+                if (line == "WAVE:START")
+                {
+                    Console.WriteLine($"[SERVER] Wave start requested by P{player.Slot}");
+                    Broadcast("WAVE:START");
+                    continue;
+                }
                 if (!line.StartsWith("POS:"))
                     Console.WriteLine($"[SERVER] From P{player.Slot}: {line}");
 
@@ -154,10 +159,18 @@ class GameServer
                     {
                         Broadcast($"POS:{player.Slot}:{x}:{y}:{angle}");
                     }
+                    continue;
                 }
-                else
+
+                if (line.StartsWith("FIRE:"))
                 {
-                    Broadcast($"P{player.Slot}: {line}");
+                    Broadcast($"FIRE:{player.Slot}:{line.Substring(5)}");
+                    continue;
+                }
+                if (line.StartsWith("TILE:"))
+                {
+                    Broadcast(line);
+                    continue;
                 }
             }
 

@@ -19,6 +19,11 @@ public class GameClient : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private Transform[] spawnPoints;
 
+    [Header("Gameplay Sync Settings")]
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Tile_Manager tileManager;
+    [SerializeField] private Round_Manager roundManager;
+
     private GameObject localPlayer;
 
     private Dictionary<int, GameObject> players = new Dictionary<int, GameObject>();
@@ -30,7 +35,13 @@ public class GameClient : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        if (tileManager == null)
+            tileManager = FindObjectOfType<Tile_Manager>();
+        if (roundManager == null)
+            roundManager = FindObjectOfType<Round_Manager>();
     }
+
     void Start()
     {
         ConnectToServer("127.0.0.1", 9000);
@@ -151,6 +162,47 @@ public class GameClient : MonoBehaviour
             }
             return;
         }
+        if (msg == "WAVE:START")
+        {
+            Debug.Log("[CLIENT] WAVE:START from server");
+
+            if (roundManager != null)
+            {
+                roundManager.StartWaveFromNetwork();
+            }
+            else
+            {
+                Debug.LogWarning("[CLIENT] roundManager is null, cannot start wave.");
+            }
+            return;
+        }
+
+        if (msg.StartsWith("FIRE:"))
+        {
+            var parts = msg.Split(':');
+            if (parts.Length >= 5 &&
+                int.TryParse(parts[1], out int shooterId) &&
+                float.TryParse(parts[2], out float x) &&
+                float.TryParse(parts[3], out float y) &&
+                float.TryParse(parts[4], out float angle))
+            {
+                SpawnBullet(shooterId, new Vector3(x, y, 0f), angle);
+            }
+            return;
+        }
+
+        if (msg.StartsWith("TILE:"))
+        {
+            var parts = msg.Split(':');
+            if (parts.Length >= 4 &&
+                int.TryParse(parts[1], out int x) &&
+                int.TryParse(parts[2], out int y) &&
+                int.TryParse(parts[3], out int type))
+            {
+                ApplyTileChange(x, y, type);
+            }
+            return;
+        }
 
         if (msg.StartsWith("POS:"))
         {
@@ -193,8 +245,7 @@ public class GameClient : MonoBehaviour
 
         if (PlayerId <= 0 || PlayerId > spawnPoints.Length)
         {
-            Debug.LogError($"[CLIENT] Invalid PlayerId {PlayerId} or spawnPoints not set properly! " +
-                           $"spawnPoints.Length = {spawnPoints.Length}");
+            Debug.LogError($"[CLIENT] Invalid PlayerId {PlayerId} or spawnPoints not set properly! spawnPoints.Length = {spawnPoints.Length}");
             return;
         }
 
@@ -212,6 +263,7 @@ public class GameClient : MonoBehaviour
 
         Debug.Log($"[CLIENT] Spawned local player at slot {PlayerId}");
     }
+
     void SpawnRemotePlayer(int id)
     {
         if (players.ContainsKey(id))
@@ -259,10 +311,35 @@ public class GameClient : MonoBehaviour
         go.transform.position = new Vector3(x, y, go.transform.position.z);
         go.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
+
+    void SpawnBullet(int shooterId, Vector3 pos, float angleZ)
+    {
+        if (bulletPrefab == null)
+        {
+            Debug.LogError("[CLIENT] bulletPrefab is not set!");
+            return;
+        }
+
+        Instantiate(bulletPrefab, pos, Quaternion.Euler(0f, 0f, angleZ));
+    }
+
+    void ApplyTileChange(int x, int y, int type)
+    {
+        if (tileManager == null)
+            tileManager = FindObjectOfType<Tile_Manager>();
+
+        if (tileManager == null)
+        {
+            Debug.LogError("[CLIENT] Tile_Manager not found in scene.");
+            return;
+        }
+
+        tileManager.TileChange(x, y, type);
+    }
+
     public void SendPosition(int p, Vector3 pos, float angleZ)
     {
         if (p != PlayerId) return;
-
         if (stream == null) return;
 
         string msg = $"POS:{pos.x:F3}:{pos.y:F3}:{angleZ:F3}";
@@ -290,6 +367,56 @@ public class GameClient : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError($"[CLIENT] Send error: {e.Message}");
+        }
+    }
+
+    public void SendFire(int p, Vector3 pos, float angleZ)
+    {
+        if (p != PlayerId) return;
+        if (stream == null) return;
+
+        string msg = $"FIRE:{pos.x:F3}:{pos.y:F3}:{angleZ:F3}";
+        byte[] data = Encoding.UTF8.GetBytes(msg + "\n");
+        try
+        {
+            stream.Write(data, 0, data.Length);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[CLIENT] SendFire error: {e.Message}");
+        }
+    }
+
+    public void SendTileChange(int p, int x, int y, int type)
+    {
+        if (p != PlayerId) return;
+        if (stream == null) return;
+
+        string msg = $"TILE:{x}:{y}:{type}";
+        byte[] data = Encoding.UTF8.GetBytes(msg + "\n");
+        try
+        {
+            stream.Write(data, 0, data.Length);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[CLIENT] SendTileChange error: {e.Message}");
+        }
+    }
+    public void SendWaveStart()
+    {
+        if (stream == null) return;
+
+        string msg = "WAVE:START";
+        byte[] data = Encoding.UTF8.GetBytes(msg + "\n");
+        try
+        {
+            stream.Write(data, 0, data.Length);
+            Debug.Log("[CLIENT] Sent WAVE:START");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[CLIENT] SendWaveStart error: {e.Message}");
         }
     }
 

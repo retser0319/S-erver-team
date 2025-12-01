@@ -41,6 +41,11 @@ public class Round_Manager : MonoBehaviour
             }
         }
     }
+    public void StartWaveFromNetwork()
+    {
+        if (round_in_progress) return;
+        RoundStart();
+    }
 
     public void RoundStart()
     {

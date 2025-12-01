@@ -20,6 +20,7 @@ public class Ctl_Player : MonoBehaviour
 
     bool wallMode = false;
     GameObject bluePrint;
+
     private void Awake()
     {
         if (gameManager == null) gameManager = FindObjectOfType<Game_Manager>();
@@ -35,13 +36,21 @@ public class Ctl_Player : MonoBehaviour
         {
             if (wallMode && !roundManager.round_in_progress)
             {
-                tileManager.TileChange((int)bluePrint.transform.position.x,
-                                       (int)bluePrint.transform.position.y,
-                                       1);
+                if (bluePrint != null && GameClient.Instance != null)
+                {
+                    Vector3 pos = bluePrint.transform.position;
+                    int tx = (int)pos.x;
+                    int ty = (int)pos.y;
+                    GameClient.Instance.SendTileChange(P, tx, ty, 1);
+                }
             }
             else if (roundManager.round_in_progress)
             {
-                Instantiate(bullet, transform.position, transform.rotation);
+                if (GameClient.Instance != null)
+                {
+                    float angleZ = transform.eulerAngles.z;
+                    GameClient.Instance.SendFire(P, transform.position, angleZ);
+                }
             }
 
             if (wallMode)
@@ -83,7 +92,8 @@ public class Ctl_Player : MonoBehaviour
         }
         else
         {
-            Destroy(bluePrint);
+            if (bluePrint != null)
+                Destroy(bluePrint);
         }
     }
 
@@ -112,7 +122,8 @@ public class Ctl_Player : MonoBehaviour
         mousePos.x = (int)(mousePos.x + 0.5f);
         mousePos.y = (int)(mousePos.y + 0.5f);
         mousePos.z = 0f;
-        bluePrint.transform.position = mousePos;
+        if (bluePrint != null)
+            bluePrint.transform.position = mousePos;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
