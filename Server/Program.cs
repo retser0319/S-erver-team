@@ -7,7 +7,7 @@ using System.Threading;
 
 class Player
 {
-    public int Slot;                 // 1~4
+    public int Slot;
     public TcpClient Client;
     public NetworkStream Stream;
 
@@ -22,11 +22,10 @@ class Player
 class GameServer
 {
     private TcpListener listener;
-    private Dictionary<int, Player> players = new Dictionary<int, Player>(); // key = Slot (1~4)
+    private Dictionary<int, Player> players = new Dictionary<int, Player>();
     private int port = 9000;
 
-    // 0~3 인덱스가 슬롯 1~4
-    private bool[] usedSlots = new bool[4];
+    private bool[] usedSlots = new bool[3];
 
     public void Start()
     {
@@ -43,10 +42,10 @@ class GameServer
             if (!usedSlots[i])
             {
                 usedSlots[i] = true;
-                return i + 1; // 슬롯 번호 1~4
+                return i + 1;
             }
         }
-        return -1; // 꽉 참
+        return -1;
     }
 
     private void FreeSlot(int slot)
@@ -64,13 +63,11 @@ class GameServer
         {
             client = listener.EndAcceptTcpClient(ar);
 
-            // 다음 클라이언트도 받을 수 있게 다시 등록
             listener.BeginAcceptTcpClient(OnClientConnected, null);
 
             int slot = GetAvailableSlot();
             if (slot == -1)
             {
-                // 자리가 없음
                 Console.WriteLine("[SERVER] Room is full. Rejecting client.");
                 var tempStream = client.GetStream();
                 byte[] fullMsg = Encoding.UTF8.GetBytes("FULL\n");
@@ -78,17 +75,21 @@ class GameServer
                 client.Close();
                 return;
             }
+            var existingSlots = new List<int>(players.Keys);
 
             Player player = new Player(slot, client);
             players[slot] = player;
 
             Console.WriteLine($"[SERVER] Player {slot} connected.");
 
-            // 자기 번호 알려주기
             Send(player, $"ASSIGN:{slot}");
 
-            // 채팅/기타 브로드캐스트 예시
-            BroadcastExcept(player, $"Player {slot} joined.");
+            foreach (int s in existingSlots)
+            {
+                Send(player, $"JOIN:{s}");
+            }
+
+            BroadcastExcept(player, $"JOIN:{slot}");
 
             StartReceive(player);
         }
@@ -127,20 +128,39 @@ class GameServer
 
             string msg = Encoding.UTF8.GetString(buffer, 0, bytesRead);
 
-            // 여러 줄이 한 번에 올 수도 있으니까 라인 단위 처리
             string[] lines = msg.Split('\n', StringSplitOptions.RemoveEmptyEntries);
             foreach (var raw in lines)
             {
                 string line = raw.Trim();
-                Console.WriteLine($"[SERVER] From P{player.Slot}: {line}");
 
-                // 나중에 여기서 명령어 파싱
-                // 예: MOVE:10:3 / SHOOT / CHAT:안녕
-                // 일단은 모두 브로드캐스트
-                Broadcast($"P{player.Slot}: {line}");
+                // 🔹 클라이언트가 QUIT 보낸 경우: 바로 종료 처리
+                if (line == "QUIT")
+                {
+                    Console.WriteLine($"[SERVER] Player {player.Slot} sent QUIT");
+                    Disconnect(player);
+                    return; // 이 플레이어에 대한 수신 루프 종료
+                }
+
+                if (!line.StartsWith("POS:"))
+                    Console.WriteLine($"[SERVER] From P{player.Slot}: {line}");
+
+                if (line.StartsWith("POS:"))
+                {
+                    var parts = line.Split(':');
+                    if (parts.Length >= 4 &&
+                        float.TryParse(parts[1], out float x) &&
+                        float.TryParse(parts[2], out float y) &&
+                        float.TryParse(parts[3], out float angle))
+                    {
+                        Broadcast($"POS:{player.Slot}:{x}:{y}:{angle}");
+                    }
+                }
+                else
+                {
+                    Broadcast($"P{player.Slot}: {line}");
+                }
             }
 
-            // 계속 수신
             StartReceive(player);
 
         }, null);
@@ -160,7 +180,9 @@ class GameServer
         }
         catch { }
 
-        Broadcast($"Player {player.Slot} left.");
+        Broadcast($"LEFT:{player.Slot}");
+
+        Console.WriteLine($"[SERVER] Player {player.Slot} left.");
     }
 
     private void Send(Player player, string message)
@@ -214,4 +236,4 @@ class GameServer
         new GameServer().Start();
         while (true) Thread.Sleep(100);
     }
-}S
+}
