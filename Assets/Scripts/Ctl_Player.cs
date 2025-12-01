@@ -6,10 +6,7 @@ using UnityEngine.UIElements;
 
 public class Ctl_Player : MonoBehaviour
 {
-    [Header("Ownership")]
-    [Tooltip("ÀÌ ¿ÀºêÁ§Æ®°¡ ÀÌ Å¬¶óÀÌ¾ğÆ®ÀÇ ·ÎÄÃ ÇÃ·¹ÀÌ¾îÀÎÁö ¿©ºÎ")]
-    public bool isLocal = true;
-
+    [SerializeField] int P;
     [SerializeField] Game_Manager gameManager;
     [SerializeField] Round_Manager roundManager;
     [SerializeField] Tile_Manager tileManager;
@@ -30,12 +27,12 @@ public class Ctl_Player : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            // º® ¼³Ä¡
+            // ë²½ ì„¤ì¹˜
             if (wallMode && !roundManager.round_in_progress)
             {
                 tileManager.TileChange((int)bluePrint.transform.position.x, (int)bluePrint.transform.position.y, 1);
             }
-            // ¶ó¿îµå ½ÃÀÛ½Ã °ø°İ°¡´É
+            // ë¼ìš´ë“œ ì‹œì‘ì‹œ ê³µê²©ê°€ëŠ¥
             else if (roundManager.round_in_progress)
             {
                 Instantiate(bullet, transform.position, transform.rotation);
@@ -107,7 +104,17 @@ public class Ctl_Player : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.x = (int)(mousePos.x + 0.5f);
         mousePos.y = (int)(mousePos.y + 0.5f);
-        mousePos.z = 0f; // 2D¿ë
+        mousePos.z = 0f; // 2Dìš©
         bluePrint.transform.position = mousePos;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Coin"))
+        {
+            Destroy(collision.gameObject);
+            gameManager.AddCoin(P, 1);
+        }
+    }
 }
+
