@@ -7,13 +7,13 @@ using System.Threading;
 
 class Player
 {
-    public int Id;
+    public int Slot;                 // 1~4
     public TcpClient Client;
     public NetworkStream Stream;
 
-    public Player(int id, TcpClient client)
+    public Player(int slot, TcpClient client)
     {
-        Id = id;
+        Slot = slot;
         Client = client;
         Stream = client.GetStream();
     }
@@ -22,8 +22,11 @@ class Player
 class GameServer
 {
     private TcpListener listener;
-    private Dictionary<int, Player> players = new Dictionary<int, Player>();
+    private Dictionary<int, Player> players = new Dictionary<int, Player>(); // key = Slot (1~4)
     private int port = 9000;
+
+    // 0~3 인덱스가 슬롯 1~4
+    private bool[] usedSlots = new bool[4];
 
     public void Start()
     {
@@ -33,39 +36,144 @@ class GameServer
         listener.BeginAcceptTcpClient(OnClientConnected, null);
     }
 
+    private int GetAvailableSlot()
+    {
+        for (int i = 0; i < usedSlots.Length; i++)
+        {
+            if (!usedSlots[i])
+            {
+                usedSlots[i] = true;
+                return i + 1; // 슬롯 번호 1~4
+            }
+        }
+        return -1; // 꽉 참
+    }
+
+    private void FreeSlot(int slot)
+    {
+        if (slot <= 0) return;
+        if (slot - 1 < usedSlots.Length)
+            usedSlots[slot - 1] = false;
+    }
+
     private void OnClientConnected(IAsyncResult ar)
     {
-        TcpClient client = listener.EndAcceptTcpClient(ar);
-        int id = client.Client.RemoteEndPoint.GetHashCode();
-        Player player = new Player(id, client);
-        players[id] = player;
+        TcpClient client = null;
 
-        Console.WriteLine($"[SERVER] Player {id} connected.");
-        listener.BeginAcceptTcpClient(OnClientConnected, null);
+        try
+        {
+            client = listener.EndAcceptTcpClient(ar);
 
-        StartReceive(player);
+            // 다음 클라이언트도 받을 수 있게 다시 등록
+            listener.BeginAcceptTcpClient(OnClientConnected, null);
+
+            int slot = GetAvailableSlot();
+            if (slot == -1)
+            {
+                // 자리가 없음
+                Console.WriteLine("[SERVER] Room is full. Rejecting client.");
+                var tempStream = client.GetStream();
+                byte[] fullMsg = Encoding.UTF8.GetBytes("FULL\n");
+                tempStream.Write(fullMsg, 0, fullMsg.Length);
+                client.Close();
+                return;
+            }
+
+            Player player = new Player(slot, client);
+            players[slot] = player;
+
+            Console.WriteLine($"[SERVER] Player {slot} connected.");
+
+            // 자기 번호 알려주기
+            Send(player, $"ASSIGN:{slot}");
+
+            // 채팅/기타 브로드캐스트 예시
+            BroadcastExcept(player, $"Player {slot} joined.");
+
+            StartReceive(player);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"[SERVER] OnClientConnected error: {e.Message}");
+            client?.Close();
+        }
     }
 
     private void StartReceive(Player player)
     {
         byte[] buffer = new byte[1024];
+
         player.Stream.BeginRead(buffer, 0, buffer.Length, (ar) =>
         {
-            int bytesRead = player.Stream.EndRead(ar);
-            if (bytesRead <= 0)
+            int bytesRead = 0;
+
+            try
             {
-                Console.WriteLine($"[SERVER] Player {player.Id} disconnected.");
-                players.Remove(player.Id);
+                bytesRead = player.Stream.EndRead(ar);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"[SERVER] Read error from Player {player.Slot}: {e.Message}");
+                Disconnect(player);
                 return;
             }
 
-            string msg = Encoding.UTF8.GetString(buffer, 0, bytesRead).Trim();
-            Console.WriteLine($"[SERVER] Received from {player.Id}: {msg}");
+            if (bytesRead <= 0)
+            {
+                Console.WriteLine($"[SERVER] Player {player.Slot} disconnected.");
+                Disconnect(player);
+                return;
+            }
 
-            Broadcast($"Player {player.Id}: {msg}");
+            string msg = Encoding.UTF8.GetString(buffer, 0, bytesRead);
 
-            StartReceive(player); // 계속 수신
+            // 여러 줄이 한 번에 올 수도 있으니까 라인 단위 처리
+            string[] lines = msg.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+            foreach (var raw in lines)
+            {
+                string line = raw.Trim();
+                Console.WriteLine($"[SERVER] From P{player.Slot}: {line}");
+
+                // 나중에 여기서 명령어 파싱
+                // 예: MOVE:10:3 / SHOOT / CHAT:안녕
+                // 일단은 모두 브로드캐스트
+                Broadcast($"P{player.Slot}: {line}");
+            }
+
+            // 계속 수신
+            StartReceive(player);
+
         }, null);
+    }
+
+    private void Disconnect(Player player)
+    {
+        if (players.ContainsKey(player.Slot))
+            players.Remove(player.Slot);
+
+        FreeSlot(player.Slot);
+
+        try
+        {
+            player.Stream?.Close();
+            player.Client?.Close();
+        }
+        catch { }
+
+        Broadcast($"Player {player.Slot} left.");
+    }
+
+    private void Send(Player player, string message)
+    {
+        byte[] data = Encoding.UTF8.GetBytes(message + "\n");
+        try
+        {
+            player.Stream.Write(data, 0, data.Length);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"[SERVER] Send error to P{player.Slot}: {e.Message}");
+        }
     }
 
     private void Broadcast(string message)
@@ -73,7 +181,31 @@ class GameServer
         byte[] data = Encoding.UTF8.GetBytes(message + "\n");
         foreach (var p in players.Values)
         {
-            p.Stream.Write(data, 0, data.Length);
+            try
+            {
+                p.Stream.Write(data, 0, data.Length);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"[SERVER] Broadcast error to P{p.Slot}: {e.Message}");
+            }
+        }
+    }
+
+    private void BroadcastExcept(Player except, string message)
+    {
+        byte[] data = Encoding.UTF8.GetBytes(message + "\n");
+        foreach (var p in players.Values)
+        {
+            if (p == except) continue;
+            try
+            {
+                p.Stream.Write(data, 0, data.Length);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"[SERVER] BroadcastExcept error to P{p.Slot}: {e.Message}");
+            }
         }
     }
 
@@ -82,4 +214,4 @@ class GameServer
         new GameServer().Start();
         while (true) Thread.Sleep(100);
     }
-}
+}S

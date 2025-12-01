@@ -6,11 +6,16 @@ using UnityEngine.UIElements;
 
 public class Ctl_Player : MonoBehaviour
 {
+    [Header("Ownership")]
+    [Tooltip("이 오브젝트가 이 클라이언트의 로컬 플레이어인지 여부")]
+    public bool isLocal = true;
+
     [SerializeField] Game_Manager gameManager;
     [SerializeField] Round_Manager roundManager;
     [SerializeField] Tile_Manager tileManager;
     [SerializeField] GameObject BF_wall;
     [SerializeField] GameObject bullet;
+
     // Update is called once per frame
     float speed = 3f;
     float xSpeed = 0;
@@ -18,8 +23,11 @@ public class Ctl_Player : MonoBehaviour
 
     bool wallMode = false;
     GameObject bluePrint;
+
     private void LateUpdate()
     {
+        if (!isLocal) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             // 벽 설치
@@ -44,8 +52,11 @@ public class Ctl_Player : MonoBehaviour
             ChangeWallMode();
         }
     }
+
     void FixedUpdate()
     {
+        if (!isLocal) return;
+
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
@@ -58,7 +69,8 @@ public class Ctl_Player : MonoBehaviour
         }
     }
 
-    private void ChangeWallMode() {
+    private void ChangeWallMode()
+    {
         wallMode = !wallMode;
         if (wallMode)
         {
@@ -70,6 +82,7 @@ public class Ctl_Player : MonoBehaviour
             Destroy(bluePrint);
         }
     }
+
     private void Move(float x, float y)
     {
         if (xSpeed < speed) xSpeed += x * Time.deltaTime;
@@ -80,6 +93,7 @@ public class Ctl_Player : MonoBehaviour
 
         transform.position += new Vector3(xSpeed, ySpeed, 0f);
     }
+
     private void LookMouse()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -87,6 +101,7 @@ public class Ctl_Player : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, angle);
     }
+
     private void BF_Follow()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
