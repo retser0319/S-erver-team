@@ -11,6 +11,7 @@ public class GameClient : MonoBehaviour
     NetworkStream stream;
     Thread receiveThread;
     public static int LocalPlayerId = -1;
+    public static int WaveOwnerSlot = -1;
     public static GameClient Instance { get; private set; }
 
     public int PlayerId { get; private set; } = -1;
@@ -44,7 +45,7 @@ public class GameClient : MonoBehaviour
 
     void Start()
     {
-        ConnectToServer("127.0.0.1", 9000);
+        ConnectToServer("192.168.0.8", 9000); 
     }
 
     void ConnectToServer(string ip, int port)
@@ -162,17 +163,53 @@ public class GameClient : MonoBehaviour
             }
             return;
         }
-        if (msg == "WAVE:START")
-        {
-            Debug.Log("[CLIENT] WAVE:START from server");
 
-            if (roundManager != null)
+        if (msg.StartsWith("WAVE:START:"))
+        {
+            var parts = msg.Split(':');
+            int ownerSlot;
+
+            if (parts.Length >= 3 && int.TryParse(parts[2], out ownerSlot))
             {
-                roundManager.StartWaveFromNetwork();
+                WaveOwnerSlot = ownerSlot;
+                Debug.Log($"[CLIENT] WAVE:START from server. Owner = P{ownerSlot}");
+
+                if (roundManager != null)
+                {
+                    roundManager.StartWaveFromNetwork(ownerSlot);
+                }
+                else
+                {
+                    Debug.LogWarning("[CLIENT] roundManager is null, cannot start wave.");
+                }
             }
             else
             {
-                Debug.LogWarning("[CLIENT] roundManager is null, cannot start wave.");
+                Debug.LogError(
+                    $"[CLIENT] Failed to parse WAVE:START message: {msg}  " +
+                    $"(parts.Length = {parts.Length})"
+                );
+            }
+
+            return;
+        }
+
+        if (msg.StartsWith("ENEMY:SPAWN:"))
+        {
+            var parts = msg.Split(':');
+            if (parts.Length >= 5)
+            {
+                string name = parts[2];
+                if (float.TryParse(parts[3], out float x) &&
+                    float.TryParse(parts[4], out float y))
+                {
+                    if (roundManager != null)
+                    {
+                        if (GameClient.LocalPlayerId == GameClient.WaveOwnerSlot)
+                            return;
+                        roundManager.SpawnEnemyFromNetwork(name, new Vector2(x, y));
+                    }
+                }
             }
             return;
         }
@@ -403,20 +440,37 @@ public class GameClient : MonoBehaviour
             Debug.LogError($"[CLIENT] SendTileChange error: {e.Message}");
         }
     }
+
     public void SendWaveStart()
     {
         if (stream == null) return;
 
-        string msg = "WAVE:START";
+        string msg = "WAVE:REQ";
         byte[] data = Encoding.UTF8.GetBytes(msg + "\n");
         try
         {
             stream.Write(data, 0, data.Length);
-            Debug.Log("[CLIENT] Sent WAVE:START");
+            Debug.Log("[CLIENT] Sent WAVE:REQ");
         }
         catch (Exception e)
         {
             Debug.LogError($"[CLIENT] SendWaveStart error: {e.Message}");
+        }
+    }
+
+    public void SendEnemySpawn(string name, Vector2 pos)
+    {
+        if (stream == null) return;
+
+        string msg = $"ENEMY:SPAWN:{name}:{pos.x:F3}:{pos.y:F3}";
+        byte[] data = Encoding.UTF8.GetBytes(msg + "\n");
+        try
+        {
+            stream.Write(data, 0, data.Length);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[CLIENT] SendEnemySpawn error: {e.Message}");
         }
     }
 
