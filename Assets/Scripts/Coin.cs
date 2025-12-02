@@ -8,7 +8,8 @@ public class Coin : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        pos = new Vector2(transform.position.x + Random.Range(-1,1), transform.position.y + Random.Range(-1,1));
+        pos = transform.position;   
+        //pos = new Vector2(transform.position.x + Random.Range(-1,1), transform.position.y + Random.Range(-1,1));
         Invoke("IsGrounded", 1);
     }
 
