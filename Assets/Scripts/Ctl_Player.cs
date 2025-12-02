@@ -131,7 +131,7 @@ public class Ctl_Player : MonoBehaviour
         if (collision.CompareTag("Coin"))
         {
             Destroy(collision.gameObject);
-            gameManager.AddCoin(P, 1);
+            gameManager.AddCoin(1);
         }
     }
 }

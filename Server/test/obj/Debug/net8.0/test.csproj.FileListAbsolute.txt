@@ -1,0 +1,15 @@
+C:\Project\S-erver-team\Server\test\bin\Debug\net8.0\test.exe
+C:\Project\S-erver-team\Server\test\bin\Debug\net8.0\test.deps.json
+C:\Project\S-erver-team\Server\test\bin\Debug\net8.0\test.runtimeconfig.json
+C:\Project\S-erver-team\Server\test\bin\Debug\net8.0\test.dll
+C:\Project\S-erver-team\Server\test\bin\Debug\net8.0\test.pdb
+C:\Project\S-erver-team\Server\test\obj\Debug\net8.0\test.GeneratedMSBuildEditorConfig.editorconfig
+C:\Project\S-erver-team\Server\test\obj\Debug\net8.0\test.AssemblyInfoInputs.cache
+C:\Project\S-erver-team\Server\test\obj\Debug\net8.0\test.AssemblyInfo.cs
+C:\Project\S-erver-team\Server\test\obj\Debug\net8.0\test.csproj.CoreCompileInputs.cache
+C:\Project\S-erver-team\Server\test\obj\Debug\net8.0\test.sourcelink.json
+C:\Project\S-erver-team\Server\test\obj\Debug\net8.0\test.dll
+C:\Project\S-erver-team\Server\test\obj\Debug\net8.0\refint\test.dll
+C:\Project\S-erver-team\Server\test\obj\Debug\net8.0\test.pdb
+C:\Project\S-erver-team\Server\test\obj\Debug\net8.0\test.genruntimeconfig.cache
+C:\Project\S-erver-team\Server\test\obj\Debug\net8.0\ref\test.dll

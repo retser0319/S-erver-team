@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fa5e848acdebb1e46a63bdc403092823
+guid: 34234ad7e7736b14c8c5329ba82ace58
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3134896609954622318
-    second: "\uD50C\uB808\uC774\uC5B4 \uACB9\uCE60\uB584_0"
+      213: 8209662401255176552
+    second: dronbullet_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,45 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Drone_Move_0
+      name: dronbullet_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
-        height: 16
+        x: 3
+        y: 3
+        width: 10
+        height: 10
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: b92dda20c7a5608428db8b599923b933
-      internalID: 2012787224
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Drone_Move_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 590adce4d8f10de4fb914c03196b95a5
-      internalID: 1836533286
+      spriteID: 869f1b015749ee170800000000000000
+      internalID: 8209662401255176552
       vertices: []
       indices: 
       edges: []
@@ -147,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 989d5a3cae3ac9a439fa5b17d4754400
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -155,12 +133,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      Drone_Move_0: 2012787224
-      Drone_Move_1: 1836533286
+      dronbullet_0: 8209662401255176552
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

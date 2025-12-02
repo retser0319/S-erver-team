@@ -8,10 +8,13 @@ using UnityEngine.UIElements;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private GameObject coin;
-    public static int count = 0;
-    public float health = 10;
-    public float defense = 0;
-    public float speed = 2;
+    public static int count;
+
+    public bool is_boss;
+
+    public float health;
+    public float defense;
+    public float speed;
     public int income;
 
     private void Awake()
@@ -21,14 +24,28 @@ public class Enemy : MonoBehaviour
     }
     private void Update()
     {
-        if (health <= 0) Destroy(gameObject);
+        if (health <= 0) Dead();
+        if (transform.position.x <= 0.2) Goal();
     }
-    private void OnDestroy()
+
+    private void Dead()
     {
+        count--;
         for (int i = 0; i < income; i++)
         {
             Instantiate(coin, transform.position, Quaternion.identity);
         }
-        count--;
+        Destroy(gameObject);
+    }
+
+    private void Goal()
+    {
+        if (is_boss) Game_Manager.Life = 0;
+        else
+        {
+            Game_Manager.Life--;
+            count--;
+            Destroy(gameObject);
+        }
     }
 }

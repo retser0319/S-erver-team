@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: bc76dee1a775c034e93e05075334c077
+guid: c65953e20ec8b0a4e9e07c2f626dd959
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3237097911768403136
-    second: dronATK_0
+      213: -9051352231430567374
+    second: dron4_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Drone_Attack_0
+      name: dron3_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,14 +115,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22fb2556e607e7142b2fb2db6abff345
-      internalID: -311510952
+      spriteID: 365c93b9d51517a41943efbc5d1b59f6
+      internalID: 70610418
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Drone_Attack_1
+      name: dron3_1
       rect:
         serializedVersion: 2
         x: 16
@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16c89cd9d9512684f8d55913422f29db
-      internalID: 1976385559
+      spriteID: f893ad719b7c314469b1a4031ce235a5
+      internalID: 896741781
       vertices: []
       indices: 
       edges: []
@@ -147,7 +147,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f832c95a049c4dc40be7a84a77840eee
+    spriteID: 157d10ce548b673459f425e87907df48
     internalID: 0
     vertices: []
     indices: 
@@ -159,8 +159,8 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Drone_Attack_0: -311510952
-      Drone_Attack_1: 1976385559
+      dron3_0: 70610418
+      dron3_1: 896741781
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

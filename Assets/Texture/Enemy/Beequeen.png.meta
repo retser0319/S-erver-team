@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 0b7db5efbe529b04080442baabfbda3e
+guid: b90c83bc208c0e249a3e41696d8a6680
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1020239985117303604
-    second: warm_0
+      213: -7327386403190759448
+    second: Beequeen_0
   - first:
-      213: 6780209717490771300
-    second: warm_1
+      213: 7569525330650885682
+    second: Beequeen_1
   - first:
-      213: -2911955348520177386
-    second: warm_2
+      213: 7126989041966551065
+    second: Beequeen_2
   - first:
-      213: -6982649930900553983
-    second: warm_3
+      213: 3983642165280851524
+    second: Beequeen_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,9 +49,9 @@ TextureImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -84,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: warm_0
+      name: Beequeen_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,42 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cccee65932167d1f0800000000000000
-      internalID: -1020239985117303604
+      spriteID: 8ef99c173e4ef4a90800000000000000
+      internalID: -7327386403190759448
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: warm_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 46560b1a0d4281e50800000000000000
-      internalID: 6780209717490771300
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: warm_2
+      name: Beequeen_1
       rect:
         serializedVersion: 2
         x: 32
         y: 0
-        width: 16
-        height: 16
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,52 +146,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 611f7a9e908a697d0800000000000000
-      internalID: -2911955348520177386
+      spriteID: 23e64c3ee2b5c0960800000000000000
+      internalID: 7569525330650885682
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: warm_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 10f34cd22e4a81f90800000000000000
-      internalID: -6982649930900553983
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: warm_4
+      name: Beequeen_2
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 16
-        height: 16
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f134adb8fe7489a45b1b33cf1d84b6e9
-      internalID: -212173196
+      spriteID: 9109484f5c628e260800000000000000
+      internalID: 7126989041966551065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beequeen_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44645dd617db84730800000000000000
+      internalID: 3983642165280851524
       vertices: []
       indices: 
       edges: []
@@ -222,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e127ecae78763f440928a3b96102229f
+    spriteID: bb5f49591cf80f24c8f8e2bc3200efff
     internalID: 0
     vertices: []
     indices: 
@@ -232,13 +210,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      warm_0: -1020239985117303604
-      warm_1: 6780209717490771300
-      warm_2: -2911955348520177386
-      warm_3: -6982649930900553983
-      warm_4: -212173196
+      Beequeen_0: -7327386403190759448
+      Beequeen_1: 7569525330650885682
+      Beequeen_2: 7126989041966551065
+      Beequeen_3: 3983642165280851524
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

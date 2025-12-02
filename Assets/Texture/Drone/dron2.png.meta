@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9f183300f8931dc40a2a3221c4dc7765
+guid: bbf227db3888a664bb2432ad9fd9599c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4301844918096825189
-    second: hammer_0
+      213: 1818655150070714337
+    second: dron2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hammer_0
+      name: dron2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -113,16 +113,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 7d3036efdbf6ec04d8bcacbb6cafe4d0
-      internalID: 2028803953
+      spriteID: 1ef46ec29392d3910800000000000000
+      internalID: 1818655150070714337
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hammer_1
+      name: dron2_1
       rect:
         serializedVersion: 2
         x: 16
@@ -137,74 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6abcc63afed572b4e9953fc7c73373fb
-      internalID: -939403125
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hammer_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cdaf020e656ab7648bd0c75ca7d9fc9a
-      internalID: -1142748040
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hammer_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ac5e2afda42bdde47aa28f2f2f4e2c9b
-      internalID: 1980482545
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hammer_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e93ef93ea56e641468d29bbb71704060
-      internalID: -1072026315
+      spriteID: a7e255af39621de4685a06dff7b12494
+      internalID: -1996546352
       vertices: []
       indices: 
       edges: []
@@ -213,7 +147,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e2f0a602c2c6e147a5b57da9594ffcc
+    spriteID: be65b524ea9a6a845ab4aa871e380e69
     internalID: 0
     vertices: []
     indices: 
@@ -225,11 +159,8 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Hammer_0: 2028803953
-      Hammer_1: -939403125
-      Hammer_2: -1142748040
-      Hammer_3: 1980482545
-      Hammer_4: -1072026315
+      dron2_0: 1818655150070714337
+      dron2_1: -1996546352
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

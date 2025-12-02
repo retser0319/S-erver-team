@@ -22,7 +22,6 @@ public class Coin : MonoBehaviour
         }
         
     }
-
     private void IsGrounded()
     {
         is_grounded = true;
