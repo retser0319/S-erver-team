@@ -153,6 +153,12 @@ class GameServer
                     continue;
                 }
 
+                if (line.StartsWith("ENEMY:DEAD:"))
+                {
+                    Broadcast(line);
+                    continue;
+                }
+
                 if (!line.StartsWith("POS:"))
                     Console.WriteLine($"[SERVER] From P{player.Slot}: {line}");
 
@@ -175,6 +181,11 @@ class GameServer
                     continue;
                 }
                 if (line.StartsWith("TILE:"))
+                {
+                    Broadcast(line);
+                    continue;
+                }
+                if (line.StartsWith("COIN:TAKEN:"))
                 {
                     Broadcast(line);
                     continue;

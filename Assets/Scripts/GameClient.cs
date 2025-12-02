@@ -45,7 +45,7 @@ public class GameClient : MonoBehaviour
 
     void Start()
     {
-        ConnectToServer("127.0.0.1", 9000); 
+        ConnectToServer("192.168.0.8", 9000); 
     }
 
     void ConnectToServer(string ip, int port)
@@ -251,6 +251,44 @@ public class GameClient : MonoBehaviour
                 float.TryParse(parts[4], out float angle))
             {
                 UpdateRemotePlayerPosition(id, x, y, angle);
+            }
+            return;
+        }
+        if (msg.StartsWith("ENEMY:DEAD:"))
+        {
+            var parts = msg.Split(':');
+            if (parts.Length >= 5 &&
+                int.TryParse(parts[2], out int income) &&
+                float.TryParse(parts[3], out float x) &&
+                float.TryParse(parts[4], out float y))
+            {
+                Vector2 pos = new Vector2(x, y);
+                HandleEnemyDeadFromNetwork(income, pos);
+            }
+            else
+            {
+                Debug.LogWarning($"[CLIENT] Failed to parse ENEMY:DEAD message: {msg}");
+            }
+            return;
+        }
+        if (msg.StartsWith("COIN:TAKEN:"))
+        {
+            var parts = msg.Split(':');
+            if (parts.Length >= 6 &&
+                int.TryParse(parts[2], out int slot) &&
+                int.TryParse(parts[3], out int amount) &&
+                float.TryParse(parts[4], out float x) &&
+                float.TryParse(parts[5], out float y))
+            {
+                Vector2 pos = new Vector2(x, y);
+
+                //Destroy(gameObject);
+
+                var gm = FindObjectOfType<Game_Manager>();
+                if (gm != null)
+                {
+                    gm.AddCoin(slot, amount);
+                }
             }
             return;
         }
@@ -464,6 +502,67 @@ public class GameClient : MonoBehaviour
         {
             Debug.LogError($"[CLIENT] SendEnemySpawn error: {e.Message}");
         }
+    }
+    public void SendEnemyDead(int income, Vector2 pos)
+    {
+        if (stream == null) return;
+
+        string msg = $"ENEMY:DEAD:{income}:{pos.x:F3}:{pos.y:F3}";
+        byte[] data = Encoding.UTF8.GetBytes(msg + "\n");
+
+        try
+        {
+            stream.Write(data, 0, data.Length);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[CLIENT] SendEnemyDead error: {e.Message}");
+        }
+    }
+    public void SendCoinTaken(int p, int amount, Vector2 pos)
+    {
+        if (stream == null) return;
+        if (p != PlayerId) return;
+
+        string msg = $"COIN:TAKEN:{p}:{amount}:{pos.x:F3}:{pos.y:F3}";
+        byte[] data = Encoding.UTF8.GetBytes(msg + "\n");
+
+        try
+        {
+            stream.Write(data, 0, data.Length);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[CLIENT] SendCoinTaken error: {e.Message}");
+        }
+    }
+    private void HandleEnemyDeadFromNetwork(int income, Vector2 pos)
+    {
+        // 씬에 있는 모든 Enemy 검색
+        Enemy[] allEnemies = FindObjectsOfType<Enemy>();
+
+        Enemy target = null;
+        float minDist = float.MaxValue;
+
+        foreach (var e in allEnemies)
+        {
+            float d = Vector2.Distance(pos, e.transform.position);
+            if (d < minDist)
+            {
+                minDist = d;
+                target = e;
+            }
+        }
+
+        // 너무 멀면 (예: 2유닛 이상) 그냥 무시
+        if (target == null || minDist > 2f)
+        {
+            Debug.LogWarning($"[CLIENT] ENEMY:DEAD but no enemy found near {pos} (minDist={minDist})");
+            return;
+        }
+
+        // Enemy 안에 LocalDead()를 만들어 두고 여기서 호출
+        target.LocalDead();
     }
 
     void OnApplicationQuit()

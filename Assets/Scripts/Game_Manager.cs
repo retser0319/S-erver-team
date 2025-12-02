@@ -34,11 +34,11 @@ public class Game_Manager : MonoBehaviour
         UI_P2_Coin.text = P2_Coin.ToString();
         UI_P3_Coin.text = P3_Coin.ToString();
     }
-    public void AddCoin(int coin)
+    public void AddCoin(int p, int coin)
     {
-        if (GameClient.LocalPlayerId == 1) P1_Coin += coin;
-        if (GameClient.LocalPlayerId == 2) P2_Coin += coin;
-        if (GameClient.LocalPlayerId == 3) P3_Coin += coin;
+        if (p == 1) P1_Coin += coin;
+        else if (p == 2) P2_Coin += coin;
+        else if (p == 3) P3_Coin += coin;
     }
 
     public void CreateRandomTower()

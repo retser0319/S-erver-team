@@ -16,25 +16,54 @@ public class Enemy : MonoBehaviour
     public float defense;
     public float speed;
     public int income;
+    private bool deathRequested = false;
 
     private void Awake()
     {
         count++;
         GetComponent<NavMeshAgent>().speed = speed;
     }
-    private void Update()
+    void Update()
     {
-        if (health <= 0) Dead();
-        if (transform.position.x <= 0.2) Goal();
+        // 1) 골 도달 처리
+        if (transform.position.x <= 0.2f)
+        {
+            Goal();
+            return;
+        }
+
+        // 2) 체력이 0 이하면, 웨이브 주인만 서버에 죽음 알림
+        if (health <= 0 && !deathRequested)
+        {
+            deathRequested = true;
+
+            if (GameClient.Instance != null)
+            {
+                // 웨이브 주인만 ENEMY:DEAD 전송
+                if (GameClient.LocalPlayerId == Round_Manager.waveOwnerSlot)
+                {
+                    Vector2 pos = transform.position;
+                    GameClient.Instance.SendEnemyDead(income, pos);
+                }
+                // 실제 LocalDead() 호출은 ENEMY:DEAD 메시지에서 처리
+            }
+            else
+            {
+                // 싱글플레이 or 네트워크 없는 경우
+                LocalDead();
+            }
+        }
     }
 
-    private void Dead()
+    public void LocalDead()
     {
         count--;
+
         for (int i = 0; i < income; i++)
         {
             Instantiate(coin, transform.position, Quaternion.identity);
         }
+
         Destroy(gameObject);
     }
 
