@@ -140,12 +140,19 @@ class GameServer
                     return;
                 }
 
-                if (line == "WAVE:START")
+                if (line == "WAVE:REQ")
                 {
                     Console.WriteLine($"[SERVER] Wave start requested by P{player.Slot}");
-                    Broadcast("WAVE:START");
+                    Broadcast($"WAVE:START:{player.Slot}");
                     continue;
                 }
+
+                if (line.StartsWith("ENEMY:SPAWN:"))
+                {
+                    Broadcast(line);
+                    continue;
+                }
+
                 if (!line.StartsWith("POS:"))
                     Console.WriteLine($"[SERVER] From P{player.Slot}: {line}");
 
