@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6658585809703274993}
   - component: {fileID: 2190702578009850563}
   m_Layer: 6
-  m_Name: P1 2
+  m_Name: P2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5c79d23ae53554e93c0b53004241e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  P: 1
+  P: 2
   gameManager: {fileID: 0}
   roundManager: {fileID: 0}
   tileManager: {fileID: 0}

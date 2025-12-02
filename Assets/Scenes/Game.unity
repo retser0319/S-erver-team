@@ -10910,7 +10910,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90362706acb21114b8b410cedc877e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameClient
-  playerPrefab: {fileID: 7208208867571571363, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
+  playerPrefabs:
+  - {fileID: 7208208867571571363, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
+  - {fileID: 7208208867571571363, guid: 4a0cdd9bd93d8414e84722aed0dbd760, type: 3}
+  - {fileID: 7208208867571571363, guid: aeabc9e55ebdbda4f80bd93208e082e5, type: 3}
   spawnPoints:
   - {fileID: 7194211467496667663, guid: f84082bb2d5f13940983c99e57cf24f6, type: 3}
   - {fileID: 7194211467496667663, guid: 4a0cdd9bd93d8414e84722aed0dbd760, type: 3}
@@ -16097,7 +16100,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0000019051367}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0.0000038102735}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1504427654
