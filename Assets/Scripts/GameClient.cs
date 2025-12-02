@@ -17,7 +17,7 @@ public class GameClient : MonoBehaviour
     public int PlayerId { get; private set; } = -1;
 
     [Header("Player Spawn Settings")]
-    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject[] playerPrefabs;
     [SerializeField] private Transform[] spawnPoints;
 
     [Header("Gameplay Sync Settings")]
@@ -45,7 +45,7 @@ public class GameClient : MonoBehaviour
 
     void Start()
     {
-        ConnectToServer("192.168.0.8", 9000); 
+        ConnectToServer("127.0.0.1", 9000); 
     }
 
     void ConnectToServer(string ip, int port)
@@ -266,12 +266,6 @@ public class GameClient : MonoBehaviour
             return;
         }
 
-        if (playerPrefab == null)
-        {
-            Debug.LogError("[CLIENT] playerPrefab is not set!");
-            return;
-        }
-
         if (spawnPoints == null)
         {
             Debug.LogError("[CLIENT] spawnPoints is NULL!");
@@ -288,7 +282,9 @@ public class GameClient : MonoBehaviour
 
         Transform spawnPos = spawnPoints[PlayerId - 1];
 
-        localPlayer = Instantiate(playerPrefab, spawnPos.position, spawnPos.rotation);
+        GameObject prefabToUse = playerPrefabs[PlayerId - 1];
+
+        localPlayer = Instantiate(prefabToUse, spawnPos.position, spawnPos.rotation);
 
         var ctl = localPlayer.GetComponent<Ctl_Player>();
         if (ctl != null)
@@ -309,19 +305,15 @@ public class GameClient : MonoBehaviour
             return;
         }
 
-        if (playerPrefab == null)
-        {
-            Debug.LogError("[CLIENT] playerPrefab is not set for remote!");
-            return;
-        }
-
         Vector3 pos = Vector3.zero;
         if (spawnPoints != null && spawnPoints.Length >= id)
         {
             pos = spawnPoints[id - 1].position;
         }
 
-        GameObject remote = Instantiate(playerPrefab, pos, Quaternion.identity);
+        GameObject prefabToUse = playerPrefabs[id - 1];
+
+        GameObject remote = Instantiate(prefabToUse, pos, Quaternion.identity);
         var ctl = remote.GetComponent<Ctl_Player>();
         if (ctl != null)
         {
