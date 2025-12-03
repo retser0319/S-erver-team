@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b51f8f7ebb76fc64fb4caa61b5fe236f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower_Gun
-  bullet: {fileID: 4731624869876710915, guid: 0d659d6458eb7ac4e9cf571ac6bc3a27, type: 3}
+  bullet: {fileID: 4731624869876710915, guid: 3c4b1cff4007d0e45abb4f7fc3d45870, type: 3}
   attackCount: 1
   attackSpeed: 0.2
   accuracy: 0
