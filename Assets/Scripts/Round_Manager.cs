@@ -22,7 +22,7 @@ public class Round_Manager : MonoBehaviour
 
     void Update()
     {
-        UI_Round.text = round.ToString() + "|10";
+        UI_Round.text = round.ToString() + "|15";
         if (GameClient.Instance != null &&
             GameClient.LocalPlayerId > 0 &&
             waveOwnerSlot > 0 &&
@@ -91,6 +91,9 @@ public class Round_Manager : MonoBehaviour
             case "fly":
                 Instantiate(enemy[3], pos, Quaternion.identity);
                 break;
+            case "bee":
+                Instantiate(enemy[6], pos, Quaternion.identity);
+                break;
             case "boss_1":
                 Instantiate(enemy[4], new Vector2(34, 4), Quaternion.identity);
                 break;
@@ -127,6 +130,9 @@ public class Round_Manager : MonoBehaviour
                 break;
             case "boss_2":
                 Instantiate(enemy[5], pos, Quaternion.identity);
+                break;
+            case "bee":
+                Instantiate(enemy[6], pos, Quaternion.identity);
                 break;
         }
     }
