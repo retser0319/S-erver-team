@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 1611a2f10d41ef0489561def0bb088ce
+guid: 347f402c99d2bb34d8a3c144c9cb75c0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3337427645810508816
-    second: image4_0
+      213: -706581046692104263
+    second: image2 1_0
   - first:
-      213: -1938298025382023219
-    second: image4_1
+      213: -3498049682403969533
+    second: image2 1_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -103,7 +103,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: image4_0
+      name: image2 1_0
       rect:
         serializedVersion: 2
         x: 2
@@ -118,19 +118,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0148a1ce2cce05e20800000000000000
-      internalID: 3337427645810508816
+      spriteID: 9b7b4ea1848b136f0800000000000000
+      internalID: -706581046692104263
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: image4_1
+      name: image2 1_1
       rect:
         serializedVersion: 2
         x: 8
         y: 5
-        width: 7
+        width: 6
         height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dcf63482738c915e0800000000000000
-      internalID: -1938298025382023219
+      spriteID: 306b4a9e85e647fc0800000000000000
+      internalID: -3498049682403969533
       vertices: []
       indices: 
       edges: []
@@ -160,8 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      image4_0: 3337427645810508816
-      image4_1: -1938298025382023219
+      image2 1_0: -706581046692104263
+      image2 1_1: -3498049682403969533
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
