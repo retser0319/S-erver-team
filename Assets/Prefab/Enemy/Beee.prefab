@@ -13,11 +13,10 @@ GameObject:
   - component: {fileID: 4856349106722338167}
   - component: {fileID: -1527158388804758813}
   - component: {fileID: 1629989316657546096}
-  - component: {fileID: 193850637057423896}
-  - component: {fileID: -1973915679922328756}
-  - component: {fileID: 4423128619648739484}
+  - component: {fileID: -4525067930347292014}
+  - component: {fileID: 5276620087619752295}
   m_Layer: 8
-  m_Name: Boss_2
+  m_Name: Beee
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +84,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -7327386403190759448, guid: b90c83bc208c0e249a3e41696d8a6680, type: 3}
+  m_Sprite: {fileID: 6694432474714850575, guid: cdb77f8452a93a64396251522aa8f2d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -172,12 +171,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coin: {fileID: 5772770156228202843, guid: 9d7ab105a84e0954790a677526d82173, type: 3}
-  is_boss: 1
-  health: 2000
+  is_boss: 0
+  health: 10
   defense: 0
-  speed: 1
-  income: 1000
---- !u!95 &193850637057423896
+  speed: 2
+  income: 0
+--- !u!95 &-4525067930347292014
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -187,7 +186,7 @@ Animator:
   m_GameObject: {fileID: 7208208867571571363}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8638430333641974b924ae5fe9da62a6, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6c0fc43b6f61c1d4ea7f6b5881ca253e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -199,7 +198,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-1973915679922328756
+--- !u!114 &5276620087619752295
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,16 +211,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AI_Fly
   speed: 0
---- !u!114 &4423128619648739484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7208208867571571363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca4098ae2d818654da0de5302c9867cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Boss_2
-  beee: {fileID: 7208208867571571363, guid: 9137073d38f9ba244b3cf2189f527ac6, type: 3}

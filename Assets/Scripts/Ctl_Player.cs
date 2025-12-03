@@ -107,6 +107,8 @@ public class Ctl_Player : MonoBehaviour
         ySpeed *= 0.9f;
 
         transform.position += new Vector3(xSpeed, ySpeed, 0f);
+
+        transform.position = new Vector2(Mathf.Clamp(transform.position.x, 0 , 34), Mathf.Clamp(transform.position.y, 0, 8));
     }
 
     private void LookMouse()
