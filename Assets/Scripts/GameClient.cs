@@ -240,6 +240,46 @@ public class GameClient : MonoBehaviour
             }
             return;
         }
+        if (msg.StartsWith("WALL:PLACE:"))
+        {
+            var parts = msg.Split(':');
+            if (parts.Length >= 5 &&
+                int.TryParse(parts[2], out int p) &&
+                int.TryParse(parts[3], out int x) &&
+                int.TryParse(parts[4], out int y))
+            {
+                var gm = FindObjectOfType<Game_Manager>();
+                if (gm != null)
+                {
+                    gm.ApplyWallPlace(p, x, y, 1);
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[CLIENT] Failed to parse WALL:PLACE message: {msg}");
+            }
+            return;
+        }
+        if (msg.StartsWith("WALL:REMOVE:"))
+        {
+            var parts = msg.Split(':');
+            if (parts.Length >= 5 &&
+                int.TryParse(parts[2], out int p) &&
+                int.TryParse(parts[3], out int x) &&
+                int.TryParse(parts[4], out int y))
+            {
+                var gm = FindObjectOfType<Game_Manager>();
+                if (gm != null)
+                {
+                    gm.ApplyWallRemove(p, x, y, 0);
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[CLIENT] Failed to parse WALL:REMOVE message: {msg}");
+            }
+            return;
+        }
 
         if (msg.StartsWith("POS:"))
         {
@@ -309,6 +349,47 @@ public class GameClient : MonoBehaviour
             else
             {
                 Debug.LogWarning($"[CLIENT] Failed to parse COIN:GIVE message: {msg}");
+            }
+            return;
+        }
+        if (msg.StartsWith("TOWER:PLACE:"))
+        {
+            var parts = msg.Split(':');
+            if (parts.Length >= 6 &&
+                int.TryParse(parts[2], out int ownerSlot) &&
+                int.TryParse(parts[3], out int x) &&
+                int.TryParse(parts[4], out int y) &&
+                int.TryParse(parts[5], out int towerIndex))
+            {
+                var gm = FindObjectOfType<Game_Manager>();
+                if (gm != null)
+                {
+                    gm.ApplyTowerPlace(ownerSlot, x, y, towerIndex);
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[CLIENT] Failed to parse TOWER:PLACE message: {msg}");
+            }
+            return;
+        }
+        if (msg.StartsWith("TOWER:REMOVE:"))
+        {
+            var parts = msg.Split(':');
+            if (parts.Length >= 5 &&
+                int.TryParse(parts[2], out int p) &&
+                int.TryParse(parts[3], out int x) &&
+                int.TryParse(parts[4], out int y))
+            {
+                var gm = FindObjectOfType<Game_Manager>();
+                if (gm != null)
+                {
+                    gm.ApplyTowerRemove(p, x, y);
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[CLIENT] Failed to parse TOWER:REMOVE message: {msg}");
             }
             return;
         }
@@ -420,8 +501,15 @@ public class GameClient : MonoBehaviour
             Debug.LogError("[CLIENT] Tile_Manager not found in scene.");
             return;
         }
-
-        tileManager.TileChange(x, y, type);
+        var gm = FindObjectOfType<Game_Manager>();
+        if (gm != null)
+        {
+            tileManager.TileChange(x, y, type);
+        }
+        else
+        {
+            tileManager.TileChange(x, y, type);
+        }
     }
 
     public void SendPosition(int p, Vector3 pos, float angleZ)
@@ -573,9 +661,76 @@ public class GameClient : MonoBehaviour
             Debug.LogError($"[CLIENT] SendGiveCoin error: {e.Message}");
         }
     }
+    public void SendWallPlace(int p, int x, int y)
+    {
+        if (p != PlayerId) return;
+        if (stream == null) return;
+
+        string msg = $"WALL:PLACE:{p}:{x}:{y}";
+        byte[] data = Encoding.UTF8.GetBytes(msg + "\n");
+
+        try
+        {
+            stream.Write(data, 0, data.Length);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[CLIENT] SendWallPlace error: {e.Message}");
+        }
+    }
+    public void SendWallRemove(int p, int x, int y)
+    {
+        if (p != PlayerId) return;
+        if (stream == null) return;
+
+        string msg = $"WALL:REMOVE:{p}:{x}:{y}";
+        byte[] data = Encoding.UTF8.GetBytes(msg + "\n");
+
+        try
+        {
+            stream.Write(data, 0, data.Length);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[CLIENT] SendWallRemove error: {e.Message}");
+        }
+    }
+    public void SendTowerPlace(int p, int x, int y, int towerIndex)
+    {
+        if (stream == null) return;
+        if (p != PlayerId) return;
+
+        string msg = $"TOWER:PLACE:{p}:{x}:{y}:{towerIndex}";
+        byte[] data = Encoding.UTF8.GetBytes(msg + "\n");
+
+        try
+        {
+            stream.Write(data, 0, data.Length);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[CLIENT] SendTowerPlace error: {e.Message}");
+        }
+    }
+    public void SendTowerRemove(int p, int x, int y)
+    {
+        if (stream == null) return;
+        if (p != PlayerId) return;
+
+        string msg = $"TOWER:REMOVE:{p}:{x}:{y}";
+        byte[] data = Encoding.UTF8.GetBytes(msg + "\n");
+
+        try
+        {
+            stream.Write(data, 0, data.Length);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[CLIENT] SendTowerRemove error: {e.Message}");
+        }
+    }
     private void HandleEnemyDeadFromNetwork(int income, Vector2 pos)
     {
-        // 씬에 있는 모든 Enemy 검색
         Enemy[] allEnemies = FindObjectsOfType<Enemy>();
 
         Enemy target = null;
@@ -591,14 +746,12 @@ public class GameClient : MonoBehaviour
             }
         }
 
-        // 너무 멀면 (예: 2유닛 이상) 그냥 무시
         if (target == null || minDist > 2f)
         {
             Debug.LogWarning($"[CLIENT] ENEMY:DEAD but no enemy found near {pos} (minDist={minDist})");
             return;
         }
 
-        // Enemy 안에 LocalDead()를 만들어 두고 여기서 호출
         target.LocalDead();
     }
     private void RemoveCoinNear(Vector2 pos)
