@@ -70,7 +70,7 @@ public class Data_Round
                 break;
         }
     }
-    // basic : 기본, speed : 빠른거, hardness : 단단한거, fly : 날아다니는거, boss_1 : 보스 1, boss_2 : 보스 2
+    // basic : 기본, speed : 빠른거, hardness : 단단한거, dragonfly : 날아다니는거, boss_1 : 보스 1, boss_2 : 보스 2
     private void SetRound_1()
     {
         for (int i = 0; i < 10; i++)
@@ -80,7 +80,7 @@ public class Data_Round
     }
     private void SetRound_2()
     {
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 15; i++){
             data.Add(new SpawnData("basic", 0.5f));
             data.Add(new SpawnData("speed", 0.5f));
             
@@ -88,7 +88,7 @@ public class Data_Round
     }
     private void SetRound_3()
     {
-        for (int i = 0; i < 15; i++){
+        for (int i = 0; i < 21; i++){
             data.Add(new SpawnData("basic", 0.5f));
             data.Add(new SpawnData("speed", 0.5f));
             if (i % 3 == 0)
@@ -96,7 +96,7 @@ public class Data_Round
     }
     private void SetRound_4()
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 35; i++)
             data.Add(new SpawnData("basic", 0.2f));
     }
     private void SetRound_5()
@@ -108,29 +108,29 @@ public class Data_Round
     }
     private void SetRound_6()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 15; i++)
             data.Add(new SpawnData("basic", 1));
         for ( int i = 0; i < 3; i++){
             data.Add(new SpawnData("hardness", 1));
-            data.Add(new SpawnData("fly", 1));
+            data.Add(new SpawnData("dragonfly", 1));
         }
             
     }
     private void SetRound_7()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 30; i++)
             data.Add(new SpawnData("speed", 0.3f));
     }
     private void SetRound_8()
     {
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 15; i++){
             data.Add(new SpawnData("hardness", 1));
-            data.Add(new SpawnData("fly", 1));
+            data.Add(new SpawnData("dragonfly", 1));
         }
     }
     private void SetRound_9()
     {
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 10; i++){
             data.Add(new SpawnData("hardness", 1));
             data.Add(new SpawnData("speed", 0.5f));
         }
@@ -146,19 +146,19 @@ public class Data_Round
     }
     private void SetRound_11()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 15; i++)
             data.Add(new SpawnData("basic", 0.1f));
             data.Add(new SpawnData("bee", 0.1f));
         for (int i = 0; i < 5; i++){
             data.Add(new SpawnData("speed", 0.5f));
-            data.Add(new SpawnData("fly", 0.5f));
+            data.Add(new SpawnData("dragonfly", 0.5f));
             data.Add(new SpawnData("hardness", 0.5f));
         }
     }
     private void SetRound_12()
     {
-        for (int i = 0; i < 15; i++)
-            data.Add(new SpawnData("fly", 1));
+        for (int i = 0; i < 20; i++)
+            data.Add(new SpawnData("dragonfly", 1));
     }
     private void SetRound_13()
     {
@@ -170,18 +170,18 @@ public class Data_Round
     }
     private void SetRound_14()
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 40; i++)
             data.Add(new SpawnData("basic", 1));
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 30; i++)
             data.Add(new SpawnData("speed", 1));
+        for (int i = 0; i < 20; i++)
+            data.Add(new SpawnData("dragonfly", 1));
         for (int i = 0; i < 10; i++)
-            data.Add(new SpawnData("fly", 1));
-        for (int i = 0; i < 5; i++)
             data.Add(new SpawnData("hardness", 1));
     }
     private void SetRound_15()
     {
-        for (int i = 0; i < 3; i++){
+        for (int i = 0; i < 2; i++){
             data.Add(new SpawnData("boss_1", 5));
             data.Add(new SpawnData("boss_2", 5));
         }
