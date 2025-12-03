@@ -114,7 +114,6 @@ public class Data_Round
             data.Add(new SpawnData("hardness", 1));
             data.Add(new SpawnData("dragonfly", 1));
         }
-            
     }
     private void SetRound_7()
     {
@@ -171,13 +170,13 @@ public class Data_Round
     private void SetRound_14()
     {
         for (int i = 0; i < 40; i++)
-            data.Add(new SpawnData("basic", 1));
+            data.Add(new SpawnData("basic", 0.1f));
         for (int i = 0; i < 30; i++)
-            data.Add(new SpawnData("speed", 1));
+            data.Add(new SpawnData("speed", 0.3f));
         for (int i = 0; i < 20; i++)
-            data.Add(new SpawnData("dragonfly", 1));
+            data.Add(new SpawnData("dragonfly", 0.3f));
         for (int i = 0; i < 10; i++)
-            data.Add(new SpawnData("hardness", 1));
+            data.Add(new SpawnData("hardness", 0.4f));
     }
     private void SetRound_15()
     {

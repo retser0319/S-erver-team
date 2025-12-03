@@ -359,7 +359,7 @@ MonoBehaviour:
   health: 300
   defense: 1.5
   speed: 1
-  income: 20
+  income: 30
 --- !u!114 &1905197282475642691
 MonoBehaviour:
   m_ObjectHideFlags: 0
