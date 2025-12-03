@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 using static UnityEngine.UI.Image;
 
 public class Tile
@@ -45,10 +44,6 @@ public class Tile_Manager : MonoBehaviour
             selectedTile.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
             UI_tower_info.transform.position = selectedTile.transform.position;
             UI_tower_info.gameObject.SetActive(true);
-        }
-        else
-        {
-            ResetSelectedTile();
         }
     }
     public void ResetSelectedTile()

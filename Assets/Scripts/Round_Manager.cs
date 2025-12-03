@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Round_Manager : MonoBehaviour
 {
     [SerializeField] public GameObject[] enemy;
+    [SerializeField] public TMP_Text UI_Round;
 
     public bool round_in_progress = false;
     public int round = 0;
@@ -19,6 +21,7 @@ public class Round_Manager : MonoBehaviour
 
     void Update()
     {
+        UI_Round.text = round.ToString() + "|10";
         if (GameClient.Instance != null &&
             GameClient.LocalPlayerId > 0 &&
             waveOwnerSlot > 0 &&
