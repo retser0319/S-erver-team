@@ -45,7 +45,7 @@ public class GameClient : MonoBehaviour
 
     void Start()
     {
-        ConnectToServer("10.201.13.49", 9000); 
+        ConnectToServer("127.0.0.1", 9000);
     }
 
     void ConnectToServer(string ip, int port)
@@ -575,7 +575,7 @@ public class GameClient : MonoBehaviour
     }
     private void HandleEnemyDeadFromNetwork(int income, Vector2 pos)
     {
-        // ¾À¿¡ ÀÖ´Â ¸ğµç Enemy °Ë»ö
+        // ì”¬ì— ìˆëŠ” ëª¨ë“  Enemy ê²€ìƒ‰
         Enemy[] allEnemies = FindObjectsOfType<Enemy>();
 
         Enemy target = null;
@@ -591,14 +591,14 @@ public class GameClient : MonoBehaviour
             }
         }
 
-        // ³Ê¹« ¸Ö¸é (¿¹: 2À¯´Ö ÀÌ»ó) ±×³É ¹«½Ã
+        // ë„ˆë¬´ ë©€ë©´ (ì˜ˆ: 2ìœ ë‹› ì´ìƒ) ê·¸ëƒ¥ ë¬´ì‹œ
         if (target == null || minDist > 2f)
         {
             Debug.LogWarning($"[CLIENT] ENEMY:DEAD but no enemy found near {pos} (minDist={minDist})");
             return;
         }
 
-        // Enemy ¾È¿¡ LocalDead()¸¦ ¸¸µé¾î µÎ°í ¿©±â¼­ È£Ãâ
+        // Enemy ì•ˆì— LocalDead()ë¥¼ ë§Œë“¤ì–´ ë‘ê³  ì—¬ê¸°ì„œ í˜¸ì¶œ
         target.LocalDead();
     }
     private void RemoveCoinNear(Vector2 pos)
@@ -609,7 +609,7 @@ public class GameClient : MonoBehaviour
 
         if (hits.Length == 0)
         {
-            Debug.Log($"[CLIENT] RemoveCoinNear: Ãæµ¹ ¾øÀ½. targetPos={pos}");
+            Debug.Log($"[CLIENT] RemoveCoinNear: ì¶©ëŒ ì—†ìŒ. targetPos={pos}");
             return;
         }
 
@@ -636,7 +636,7 @@ public class GameClient : MonoBehaviour
         }
         else
         {
-            Debug.Log($"[CLIENT] RemoveCoinNear: Coin ÅÂ±×¸¦ °¡Áø ¿ÀºêÁ§Æ®¸¦ Ã£Áö ¸øÇÔ. targetPos={pos}");
+            Debug.Log($"[CLIENT] RemoveCoinNear: Coin íƒœê·¸ë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ì§€ ëª»í•¨. targetPos={pos}");
         }
     }
 
