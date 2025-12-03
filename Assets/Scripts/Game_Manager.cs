@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Game_Manager : MonoBehaviour
@@ -94,8 +95,25 @@ public class Game_Manager : MonoBehaviour
         if (GameClient.LocalPlayerId == 2) P2_Coin += 2;
         if (GameClient.LocalPlayerId == 3) P3_Coin += 2;
 
-        if (tileManager.selectedTile.transform.GetChild(0) != null)
-            Destroy(tileManager.selectedTile.transform.GetChild(0).gameObject);
+        Transform t = tileManager.selectedTile.transform;
+        if (tileManager.selectedTile == null)
+        {
+            Debug.LogWarning("RemoveTower: selectedTile 이 null 입니다.");
+            return;
+        }
+
+        if (t.childCount > 0)
+        {
+            // 첫 번째 자식(타워)만 파괴
+            Destroy(t.GetChild(0).gameObject);
+        }
+        else
+        {
+            // 타워가 없으면 바닥을 잔디(0)로 교체
+            Vector3 pos = t.position;
+            tileManager.TileChange((int)pos.x, (int)pos.y, 0); // 0: 잔디, 1: 벽
+        }
+
         tileManager.ResetSelectedTile();
     }
 }
