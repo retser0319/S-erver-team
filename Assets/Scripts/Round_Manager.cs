@@ -95,7 +95,7 @@ public class Round_Manager : MonoBehaviour
             case "hardness":
                 Instantiate(enemy[2], pos, Quaternion.identity);
                 break;
-            case "fly":
+            case "dragonfly":
                 Instantiate(enemy[3], pos, Quaternion.identity);
                 break;
             case "boss_1":
@@ -128,7 +128,7 @@ public class Round_Manager : MonoBehaviour
             case "hardness":
                 Instantiate(enemy[2], pos, Quaternion.identity);
                 break;
-            case "fly":
+            case "dragonfly":
                 Instantiate(enemy[3], pos, Quaternion.identity);
                 break;
             case "boss_1":

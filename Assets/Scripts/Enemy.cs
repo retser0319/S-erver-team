@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     {
         count++;
         if (TryGetComponent(out NavMeshAgent agent)) agent.speed = speed;
-        if (TryGetComponent(out AI_Fly fly)) fly.speed = speed;
+        if (TryGetComponent(out AI_Fly dragonfly)) dragonfly.speed = speed;
 
         health *= 1f + (0.1f * Round_Manager.round);
     }
