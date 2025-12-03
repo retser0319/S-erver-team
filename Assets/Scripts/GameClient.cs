@@ -282,7 +282,7 @@ public class GameClient : MonoBehaviour
             {
                 Vector2 pos = new Vector2(x, y);
 
-                //Destroy(gameObject);
+                RemoveCoinNear(pos);
 
                 var gm = FindObjectOfType<Game_Manager>();
                 if (gm != null)
@@ -564,6 +564,45 @@ public class GameClient : MonoBehaviour
         // Enemy 안에 LocalDead()를 만들어 두고 여기서 호출
         target.LocalDead();
     }
+    private void RemoveCoinNear(Vector2 pos)
+    {
+        float radius = 0.5f;
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(pos, radius);
+
+        if (hits.Length == 0)
+        {
+            Debug.Log($"[CLIENT] RemoveCoinNear: 충돌 없음. targetPos={pos}");
+            return;
+        }
+
+        GameObject nearest = null;
+        float nearestDist = float.MaxValue;
+
+        foreach (var col in hits)
+        {
+            if (!col.CompareTag("Coin"))
+                continue;
+
+            float d = Vector2.Distance(pos, col.transform.position);
+            if (d < nearestDist)
+            {
+                nearestDist = d;
+                nearest = col.gameObject;
+            }
+        }
+
+        if (nearest != null)
+        {
+            Debug.Log($"[CLIENT] RemoveCoinNear: {nearest.name}, pos={nearest.transform.position}, dist={nearestDist}");
+            Destroy(nearest);
+        }
+        else
+        {
+            Debug.Log($"[CLIENT] RemoveCoinNear: Coin 태그를 가진 오브젝트를 찾지 못함. targetPos={pos}");
+        }
+    }
+
 
     void OnApplicationQuit()
     {

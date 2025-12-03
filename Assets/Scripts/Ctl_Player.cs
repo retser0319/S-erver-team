@@ -128,7 +128,19 @@ public class Ctl_Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Coin"))
+        if (!collision.CompareTag("Coin"))
+            return;
+
+        if (GameClient.Instance != null)
+        {
+            Vector2 pos = collision.transform.position;
+            GameClient.Instance.SendCoinTaken(P, 1, pos);
+
+            //var col = collision.GetComponent<Collider2D>();
+            //if (col != null)
+            //    col.enabled = false;
+        }
+        else
         {
             Destroy(collision.gameObject);
             gameManager.AddCoin(P, 1);
