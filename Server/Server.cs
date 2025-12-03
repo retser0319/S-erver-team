@@ -146,7 +146,12 @@ class GameServer
                     Broadcast($"WAVE:START:{player.Slot}");
                     continue;
                 }
-
+                if (line == "WAVE:FINISH")
+                {
+                    Console.WriteLine($"[SERVER] Wave start requested by P{player.Slot}");
+                    Broadcast($"WAVE:FINISH:{player.Slot}");
+                    continue;
+                }
                 if (line.StartsWith("ENEMY:SPAWN:"))
                 {
                     Broadcast(line);

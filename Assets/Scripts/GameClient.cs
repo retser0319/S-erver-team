@@ -194,6 +194,19 @@ public class GameClient : MonoBehaviour
             return;
         }
 
+        if (msg.StartsWith("WAVE:FINISH:"))
+        {
+            if (roundManager != null)
+            {
+                roundManager.RoundFinishFromNetwork();
+            }
+            else
+            {
+                Debug.LogWarning("[CLIENT] roundManager is null, cannot finish wave.");
+            }
+            return;
+        }
+
         if (msg.StartsWith("ENEMY:SPAWN:"))
         {
             var parts = msg.Split(':');

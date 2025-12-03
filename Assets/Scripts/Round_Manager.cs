@@ -22,16 +22,18 @@ public class Round_Manager : MonoBehaviour
 
     void Update()
     {
-        UI_Round.text = round.ToString() + "|10";
-        if (GameClient.Instance != null &&
-            GameClient.LocalPlayerId > 0 &&
-            waveOwnerSlot > 0 &&
-            GameClient.LocalPlayerId != waveOwnerSlot)
+        UI_Round.text = round.ToString() + "|15";
+        if (GameClient.Instance != null && GameClient.LocalPlayerId > 0 &&  waveOwnerSlot > 0 && GameClient.LocalPlayerId != waveOwnerSlot)
         {
             return;
         }
 
-        if (Enemy.count == 0 && data.Count == 0) round_in_progress = false;
+        if (Enemy.count == 0 && data.Count == 0 && round_in_progress == true)
+        {
+            round_in_progress = false; 
+            GameClient.Instance.SendMessageToServer("WAVE:FINISH");
+            Debug.Log("Finish");
+        }
 
         if (data.Count == 0) return;
         tick += Time.deltaTime;
@@ -59,7 +61,6 @@ public class Round_Manager : MonoBehaviour
     public void StartWaveFromNetwork(int ownerSlot)
     {
         waveOwnerSlot = ownerSlot;
-        if (round_in_progress) return;
         RoundStart();
     }
 
@@ -70,6 +71,12 @@ public class Round_Manager : MonoBehaviour
         round_in_progress = true;
         data = new Data_Round(round).data;
         delay = data[0].delay;
+    }
+
+    public void RoundFinishFromNetwork()
+    {
+        data.Clear();
+        round_in_progress = false;
     }
 
     public void SpawnEnemy(string name)
@@ -99,8 +106,7 @@ public class Round_Manager : MonoBehaviour
                 break;
         }
 
-        if (GameClient.Instance != null &&
-            GameClient.LocalPlayerId == waveOwnerSlot)
+        if (GameClient.Instance != null && GameClient.LocalPlayerId == waveOwnerSlot)
         {
             GameClient.Instance.SendEnemySpawn(name, pos);
         }
