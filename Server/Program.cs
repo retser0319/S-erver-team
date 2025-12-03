@@ -190,6 +190,11 @@ class GameServer
                     Broadcast(line);
                     continue;
                 }
+                if (line.StartsWith("COIN:GIVE:"))
+                {
+                    Broadcast(line);
+                    continue;
+                }
             }
 
             StartReceive(player);

@@ -11442,7 +11442,7 @@ MonoBehaviour:
   - {fileID: 7208208867571571363, guid: 96e45de63f73919489e817dd080ab75e, type: 3}
   UI_Round: {fileID: 1525088650}
   round_in_progress: 0
-  round: 0
+  round: 1
 --- !u!114 &968173336
 MonoBehaviour:
   m_ObjectHideFlags: 0
