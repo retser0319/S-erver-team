@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using static Unity.Collections.Unicode;
 
 public class Game_Manager : MonoBehaviour
 {
     [SerializeField] private Tile_Manager tileManager;
     [SerializeField] private Round_Manager roundManager;
     [SerializeField] public GameObject[] Towers;
+    [SerializeField] public GameObject EndScreen;
     [SerializeField] public TMP_Text UI_Life;
     [SerializeField] public TMP_Text UI_P1_Coin;
     [SerializeField] public TMP_Text UI_P2_Coin;
     [SerializeField] public TMP_Text UI_P3_Coin;
+
+    public static bool game_clear = false;
+    public static bool game_over = false;
 
     public static int Life = 100;
     public static int P1_Coin = 10;
@@ -24,6 +30,21 @@ public class Game_Manager : MonoBehaviour
     {
         UI_Renewal_Life();
         UI_Renewal_Coin();
+
+        if (roundManager.round_in_progress == false && roundManager.round >= 15 && game_clear == false)
+        {
+            game_clear = true;
+            EndScreen.SetActive(true);
+            EndScreen.GetComponentInChildren<TMP_Text>().text = "Game Clear!!";
+            Invoke("GameRestart", 3);
+        }
+        else if (Life <= 0 && game_over == false)
+        {
+            game_over = true;
+            EndScreen.SetActive(true);
+            EndScreen.GetComponentInChildren<TMP_Text>().text = "Game Over..";
+            Invoke("GameRestart", 3);
+        }
     }
     public void UI_Renewal_Life()
     {
@@ -115,5 +136,17 @@ public class Game_Manager : MonoBehaviour
         }
 
         tileManager.ResetSelectedTile();
+    }
+    private void GameRestart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        game_clear = false;
+        game_over = false;
+        Life = 100;
+        P1_Coin = 10;
+        P2_Coin = 10;
+        P3_Coin = 10;
+        Enemy.count = 0;
+        Round_Manager.waveOwnerSlot = -1;
     }
 }

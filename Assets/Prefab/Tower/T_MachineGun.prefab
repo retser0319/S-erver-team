@@ -198,7 +198,7 @@ MonoBehaviour:
   bullet: {fileID: 4731624869876710915, guid: 9130d24f85d414d47b2df7a879da23cd, type: 3}
   attackCount: 1
   attackSpeed: 10
-  accuracy: 5
+  accuracy: 30
   head: {fileID: 1046821979228041517}
   range: {fileID: 2738141065291163505}
 --- !u!1 &9170652584890786278
@@ -328,7 +328,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 10
+  m_Radius: 15
 --- !u!114 &2738141065291163505
 MonoBehaviour:
   m_ObjectHideFlags: 0
