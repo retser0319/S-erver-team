@@ -98,6 +98,9 @@ public class Round_Manager : MonoBehaviour
             case "fly":
                 Instantiate(enemy[3], pos, Quaternion.identity);
                 break;
+            case "bee":
+                Instantiate(enemy[6], pos, Quaternion.identity);
+                break;
             case "boss_1":
                 Instantiate(enemy[4], new Vector2(34, 4), Quaternion.identity);
                 break;
@@ -134,24 +137,27 @@ public class Round_Manager : MonoBehaviour
             case "boss_2":
                 Instantiate(enemy[5], pos, Quaternion.identity);
                 break;
+            case "bee":
+                Instantiate(enemy[6], pos, Quaternion.identity);
+                break;
         }
     }
     public bool IsPathBlocked(Vector3 startPos, Vector3 endPos)
     {
         NavMeshPath path = new NavMeshPath();
 
-        // NavMesh °æ·Î °è»ê
+        // NavMesh ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         bool hasPath = NavMesh.CalculatePath(startPos, endPos, NavMesh.AllAreas, path);
 
-        // °æ·Î°¡ ¾øÀ¸¸é ÀÌ¹Ì ¸·Èù »óÅÂ
+        // ï¿½ï¿½Î°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (!hasPath)
             return true;
 
-        // °æ·Î°¡ ÀÖÁö¸¸ ½ÇÁ¦·Î ±æÀÌ ²÷°Ü ÀÖÀ» ¼ö ÀÖÀ¸¹Ç·Î »óÅÂ Ã¼Å©
+        // ï¿½ï¿½Î°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
         if (path.status != NavMeshPathStatus.PathComplete)
             return true;
 
-        // ¿©±â±îÁö ¿ÔÀ¸¸é ¿ÏÀüÇÑ °æ·Î Á¸Àç ¡æ ¸·È÷Áö ¾ÊÀ½
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         return false;
     }
 }
