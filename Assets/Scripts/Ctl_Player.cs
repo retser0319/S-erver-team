@@ -37,12 +37,27 @@ public class Ctl_Player : MonoBehaviour
         {
             if (wallMode && !roundManager.round_in_progress)
             {
-                if (bluePrint != null && GameClient.Instance != null)
+                if (bluePrint != null)
                 {
                     Vector3 pos = bluePrint.transform.position;
                     int tx = (int)pos.x;
                     int ty = (int)pos.y;
-                    GameClient.Instance.SendTileChange(P, tx, ty, 1);
+
+                    if (gameManager.GetCoin(P) < 2)
+                    {
+                        Debug.Log("[CLIENT] 벽 설치 코인 부족");
+                    }
+                    else
+                    {
+                        if (GameClient.Instance != null)
+                        {
+                            GameClient.Instance.SendWallPlace(P, tx, ty);
+                        }
+                        else
+                        {
+                            gameManager.ApplyWallPlace(P, tx, ty, 1);
+                        }
+                    }
                 }
             }
             else if (roundManager.round_in_progress)
@@ -57,7 +72,6 @@ public class Ctl_Player : MonoBehaviour
             if (wallMode)
                 ChangeWallMode();
         }
-
         if (Input.GetKeyDown(KeyCode.E) && !roundManager.round_in_progress)
             ChangeWallMode();
     }
@@ -136,10 +150,6 @@ public class Ctl_Player : MonoBehaviour
         {
             Vector2 pos = collision.transform.position;
             GameClient.Instance.SendCoinTaken(P, 1, pos);
-
-            //var col = collision.GetComponent<Collider2D>();
-            //if (col != null)
-            //    col.enabled = false;
         }
         else
         {
