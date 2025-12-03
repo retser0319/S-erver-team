@@ -195,6 +195,26 @@ class GameServer
                     Broadcast(line);
                     continue;
                 }
+                if (line.StartsWith("WALL:PLACE:"))
+                {
+                    Broadcast(line);
+                    continue;
+                }
+                if (line.StartsWith("WALL:REMOVE:"))
+                {
+                    Broadcast(line);
+                    continue;
+                }
+                if (line.StartsWith("TOWER:PLACE"))
+                {
+                    Broadcast(line);
+                    continue;
+                }
+                if (line.StartsWith("TOWER:REMOVE"))
+                {
+                    Broadcast(line);
+                    continue;
+                }
             }
 
             StartReceive(player);
