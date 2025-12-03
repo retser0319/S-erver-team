@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.UI.Image;
@@ -14,6 +15,7 @@ public class Tile_Manager : MonoBehaviour
     [SerializeField] private Round_Manager roundManager;
     [SerializeField] private GameObject[] bluePrint;
     [SerializeField] private RectTransform UI_tower_info;
+    [SerializeField] public TMP_Text UI_price;
     public GameObject[,] map;
     public Tile[,] tiles;
     public int ySize, xSize;
@@ -43,6 +45,7 @@ public class Tile_Manager : MonoBehaviour
             selectedTile = hit.transform.gameObject;
             selectedTile.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
             UI_tower_info.transform.position = selectedTile.transform.position;
+            UI_price.text = (5 + GameObject.FindGameObjectsWithTag("Tower").Length).ToString();
             UI_tower_info.gameObject.SetActive(true);
         }
     }

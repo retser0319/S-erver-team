@@ -10,7 +10,7 @@ public class Round_Manager : MonoBehaviour
     [SerializeField] public TMP_Text UI_Round;
 
     public bool round_in_progress = false;
-    public int round = 0;
+    public static int round = 0;
 
     private float tick = 0;
     private int index = 0;

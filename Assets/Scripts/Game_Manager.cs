@@ -21,9 +21,9 @@ public class Game_Manager : MonoBehaviour
     public static bool game_over = false;
 
     public static int Life = 100;
-    public static int P1_Coin = 100;
-    public static int P2_Coin = 100;
-    public static int P3_Coin = 100;
+    public static int P1_Coin = 0;
+    public static int P2_Coin = 0;
+    public static int P3_Coin = 0;
 
 
     private void Update()
@@ -31,7 +31,7 @@ public class Game_Manager : MonoBehaviour
         UI_Renewal_Life();
         UI_Renewal_Coin();
 
-        if (roundManager.round_in_progress == false && roundManager.round >= 15 && game_clear == false)
+        if (roundManager.round_in_progress == false && Round_Manager.round >= 15 && game_clear == false)
         {
             game_clear = true;
             EndScreen.SetActive(true);
@@ -197,7 +197,7 @@ public class Game_Manager : MonoBehaviour
         {
             int p = GameClient.LocalPlayerId;
 
-            if (GetCoin(p) < 5)
+            if (GetCoin(p) < 5 + GameObject.FindGameObjectsWithTag("Tower").Length)
             {
                 Debug.Log("[GM] 타워 설치 실패: 코인 부족");
                 return;
@@ -260,5 +260,6 @@ public class Game_Manager : MonoBehaviour
         P3_Coin = 10;
         Enemy.count = 0;
         Round_Manager.waveOwnerSlot = -1;
+        Round_Manager.round = 0;
     }
 }
