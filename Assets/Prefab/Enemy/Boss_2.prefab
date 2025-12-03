@@ -265,7 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coin: {fileID: 5772770156228202843, guid: 9d7ab105a84e0954790a677526d82173, type: 3}
   is_boss: 1
-  health: 1000
+  health: 800
   defense: 0
   speed: 2
   income: 1000
