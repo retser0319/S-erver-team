@@ -173,10 +173,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coin: {fileID: 5772770156228202843, guid: 9d7ab105a84e0954790a677526d82173, type: 3}
   is_boss: 1
-  health: 10
-  defense: 0
+  health: 100
+  defense: 1
   speed: 2
-  income: 10
+  income: 20
 --- !u!114 &1905197282475642691
 MonoBehaviour:
   m_ObjectHideFlags: 0

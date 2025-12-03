@@ -92,10 +92,10 @@ public class Round_Manager : MonoBehaviour
                 Instantiate(enemy[3], pos, Quaternion.identity);
                 break;
             case "boss_1":
-                Instantiate(enemy[4], pos, Quaternion.identity);
+                Instantiate(enemy[4], new Vector2(34, 4), Quaternion.identity);
                 break;
             case "boss_2":
-                Instantiate(enemy[5], pos, Quaternion.identity);
+                Instantiate(enemy[5], new Vector2(34, 4), Quaternion.identity);
                 break;
         }
 

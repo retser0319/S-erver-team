@@ -21,7 +21,8 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         count++;
-        GetComponent<NavMeshAgent>().speed = speed;
+        if (TryGetComponent(out NavMeshAgent agent)) agent.speed = speed;
+        if (TryGetComponent(out AI_Fly fly)) fly.speed = speed;
     }
     void Update()
     {
