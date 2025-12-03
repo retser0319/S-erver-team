@@ -198,7 +198,7 @@ MonoBehaviour:
   bullet: {fileID: 4731624869876710915, guid: 0d659d6458eb7ac4e9cf571ac6bc3a27, type: 3}
   attackCount: 1
   attackSpeed: 0.8
-  accuracy: 0
+  accuracy: 5
   head: {fileID: 4160708858723529608}
   range: {fileID: 2738141065291163505}
 --- !u!1 &9170652584890786278
