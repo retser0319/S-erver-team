@@ -116,13 +116,13 @@ public class Game_Manager : MonoBehaviour
     }
     public void ApplyTowerPlace(int p, int x, int y, int towerIndex)
     {
-        if (GetCoin(p) < 5 + GameObject.FindGameObjectsWithTag("Tower").Length)
+        if (GetCoin(p) < 5 + (GameObject.FindGameObjectsWithTag("Tower").Length / 3))
         {
             Debug.Log($"[GM] ApplyTowerPlace: P{p} 코인 부족");
             return;
         }
 
-        AddCoin(p, -(5 + GameObject.FindGameObjectsWithTag("Tower").Length));
+        AddCoin(p, -(5 + (GameObject.FindGameObjectsWithTag("Tower").Length / 3)));
 
         if (x < 0 || x >= tileManager.xSize || y < 0 || y >= tileManager.ySize)
         {
@@ -197,7 +197,7 @@ public class Game_Manager : MonoBehaviour
         {
             int p = GameClient.LocalPlayerId;
 
-            if (GetCoin(p) < 5 + GameObject.FindGameObjectsWithTag("Tower").Length)
+            if (GetCoin(p) < 5 + (GameObject.FindGameObjectsWithTag("Tower").Length / 3))
             {
                 Debug.Log("[GM] 타워 설치 실패: 코인 부족");
                 return;

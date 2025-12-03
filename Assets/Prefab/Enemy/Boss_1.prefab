@@ -358,7 +358,7 @@ MonoBehaviour:
   is_boss: 1
   health: 400
   defense: 1.5
-  speed: 2
+  speed: 1
   income: 20
 --- !u!114 &1905197282475642691
 MonoBehaviour:

@@ -14,6 +14,5 @@ public class Boss_1 : MonoBehaviour
     private void Update()
     {
         hp_green.transform.localScale = new Vector2(1.5f * (stats.health / maxHP), 0.1f);
-        hp_green.transform.position = new Vector2(-0.75f * (stats.health / maxHP), 0.5f);
     }
 }
