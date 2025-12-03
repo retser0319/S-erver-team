@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Round_Manager : MonoBehaviour
 {
@@ -64,7 +65,7 @@ public class Round_Manager : MonoBehaviour
 
     public void RoundStart()
     {
-        if (round_in_progress) return;
+        if (IsPathBlocked(new Vector2(34, 6), new Vector2(0, 6)) || round_in_progress) return;
         round++;
         round_in_progress = true;
         data = new Data_Round(round).data;
@@ -128,5 +129,23 @@ public class Round_Manager : MonoBehaviour
                 Instantiate(enemy[5], pos, Quaternion.identity);
                 break;
         }
+    }
+    public bool IsPathBlocked(Vector3 startPos, Vector3 endPos)
+    {
+        NavMeshPath path = new NavMeshPath();
+
+        // NavMesh 경로 계산
+        bool hasPath = NavMesh.CalculatePath(startPos, endPos, NavMesh.AllAreas, path);
+
+        // 경로가 없으면 이미 막힌 상태
+        if (!hasPath)
+            return true;
+
+        // 경로가 있지만 실제로 길이 끊겨 있을 수 있으므로 상태 체크
+        if (path.status != NavMeshPathStatus.PathComplete)
+            return true;
+
+        // 여기까지 왔으면 완전한 경로 존재 → 막히지 않음
+        return false;
     }
 }
