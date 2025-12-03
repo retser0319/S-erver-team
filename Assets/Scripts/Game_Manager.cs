@@ -116,13 +116,13 @@ public class Game_Manager : MonoBehaviour
     }
     public void ApplyTowerPlace(int p, int x, int y, int towerIndex)
     {
-        if (GetCoin(p) < 5)
+        if (GetCoin(p) < 5 + GameObject.FindGameObjectsWithTag("Tower").Length)
         {
             Debug.Log($"[GM] ApplyTowerPlace: P{p} 코인 부족");
             return;
         }
 
-        AddCoin(p, -5);
+        AddCoin(p, -(5 + GameObject.FindGameObjectsWithTag("Tower").Length));
 
         if (x < 0 || x >= tileManager.xSize || y < 0 || y >= tileManager.ySize)
         {

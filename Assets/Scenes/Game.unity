@@ -6957,6 +6957,7 @@ MonoBehaviour:
   - {fileID: 4305958609066974094, guid: e3d7194f3896ba744b8808fc9ae3bba8, type: 3}
   - {fileID: 4305958609066974094, guid: 6aa70ee0fa4ae7c40afc29c1af5bdeec, type: 3}
   UI_tower_info: {fileID: 2653652562994095612}
+  UI_price: {fileID: 1213352088}
   ySize: 0
   xSize: 0
   selectedTile: {fileID: 0}
@@ -11741,7 +11742,6 @@ MonoBehaviour:
   - {fileID: 7208208867571571363, guid: 96e45de63f73919489e817dd080ab75e, type: 3}
   UI_Round: {fileID: 1525088650}
   round_in_progress: 0
-  round: 0
 --- !u!114 &968173336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14077,7 +14077,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5
+  m_text: 00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -14104,8 +14104,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -24009,7 +24009,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1085, y: 466}
+  m_AnchoredPosition: {x: 1055, y: 485}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3532884153962750312

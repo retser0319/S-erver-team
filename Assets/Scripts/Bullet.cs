@@ -16,11 +16,14 @@ public class Bullet : MonoBehaviour
     {
         transform.position += transform.right * speed * Time.deltaTime;
     }
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy"))
         {
-            collision.collider.GetComponent<Enemy>().health -= damage;
+            var e = collision.GetComponent<Enemy>();
+            float d = damage - e.defense;
+            if (d < 0) d = 0;
+            e.health -= d;
             Destroy(gameObject);  // 자기 자신 삭제
         }
     }
