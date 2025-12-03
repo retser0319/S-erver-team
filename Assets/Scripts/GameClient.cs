@@ -45,7 +45,7 @@ public class GameClient : MonoBehaviour
 
     void Start()
     {
-        ConnectToServer("127.0.0.1", 9000); 
+        ConnectToServer("10.201.13.49", 9000); 
     }
 
     void ConnectToServer(string ip, int port)
@@ -292,6 +292,26 @@ public class GameClient : MonoBehaviour
             }
             return;
         }
+        if (msg.StartsWith("COIN:GIVE:"))
+        {
+            var parts = msg.Split(':');
+            if (parts.Length >= 5 &&
+                int.TryParse(parts[2], out int fromSlot) &&
+                int.TryParse(parts[3], out int toSlot) &&
+                int.TryParse(parts[4], out int amount))
+            {
+                var gm = FindObjectOfType<Game_Manager>();
+                if (gm != null)
+                {
+                    gm.ApplyGiveCoin(fromSlot, toSlot, amount);
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[CLIENT] Failed to parse COIN:GIVE message: {msg}");
+            }
+            return;
+        }
 
         Debug.Log($"[SERVER] {msg}");
     }
@@ -534,6 +554,23 @@ public class GameClient : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError($"[CLIENT] SendCoinTaken error: {e.Message}");
+        }
+    }
+    public void SendGiveCoin(int targetSlot, int amount)
+    {
+        if (stream == null) return;
+        if (PlayerId <= 0) return;
+
+        string msg = $"COIN:GIVE:{PlayerId}:{targetSlot}:{amount}";
+        byte[] data = Encoding.UTF8.GetBytes(msg + "\n");
+
+        try
+        {
+            stream.Write(data, 0, data.Length);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[CLIENT] SendGiveCoin error: {e.Message}");
         }
     }
     private void HandleEnemyDeadFromNetwork(int income, Vector2 pos)

@@ -42,21 +42,35 @@ public class Game_Manager : MonoBehaviour
     }
     public void GiveCoin(int p)
     {
-        if (GameClient.LocalPlayerId == 1 && P1_Coin >= 1)
+        if (GameClient.Instance != null && GameClient.LocalPlayerId > 0)
         {
-            P1_Coin -= 1;
-            AddCoin(p, 1);
+            if (GetCoin(GameClient.LocalPlayerId) <= 0)
+                return;
+
+            GameClient.Instance.SendGiveCoin(p, 1);
+            return;
         }
-        if (GameClient.LocalPlayerId == 2 && P2_Coin >= 1)
-        {
-            P1_Coin -= 1;
-            AddCoin(p, 1);
-        }
-        if (GameClient.LocalPlayerId == 3 && P3_Coin >= 1)
-        {
-            P1_Coin -= 1;
-            AddCoin(p, 1);
-        }
+        ApplyGiveCoin(GameClient.LocalPlayerId, p, 1);
+    }
+
+    public int GetCoin(int p)
+    {
+        if (p == 1) return P1_Coin;
+        if (p == 2) return P2_Coin;
+        if (p == 3) return P3_Coin;
+        return 0;
+    }
+
+    public void ApplyGiveCoin(int from, int to, int amount)
+    {
+        if (amount <= 0) return;
+
+        if (from == 1 && P1_Coin >= amount) P1_Coin -= amount;
+        else if (from == 2 && P2_Coin >= amount) P2_Coin -= amount;
+        else if (from == 3 && P3_Coin >= amount) P3_Coin -= amount;
+        else return;
+
+        AddCoin(to, amount);
     }
     public void CloseTab()
     {
