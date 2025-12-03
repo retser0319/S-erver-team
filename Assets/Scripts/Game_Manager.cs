@@ -58,6 +58,10 @@ public class Game_Manager : MonoBehaviour
             AddCoin(p, 1);
         }
     }
+    public void CloseTab()
+    {
+        tileManager.ResetSelectedTile();
+    }
     public void CreateRandomTower()
     {
         if (GameClient.LocalPlayerId == 1 && P1_Coin >= 5) P1_Coin -= 5;
