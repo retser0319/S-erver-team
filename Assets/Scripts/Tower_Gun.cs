@@ -30,9 +30,9 @@ public class Tower_Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Rotate();
         if (Time.time - attackDelay > interval && range.targets.Count > 0)
         {
+            Rotate();
             Attack();
             attackDelay = Time.time;
         }

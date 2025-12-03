@@ -45,7 +45,7 @@ public class Tile_Manager : MonoBehaviour
             selectedTile = hit.transform.gameObject;
             selectedTile.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
             UI_tower_info.transform.position = selectedTile.transform.position;
-            UI_price.text = (5 + GameObject.FindGameObjectsWithTag("Tower").Length).ToString();
+            UI_price.text = (5 + (GameObject.FindGameObjectsWithTag("Tower").Length / 3)).ToString();
             UI_tower_info.gameObject.SetActive(true);
         }
     }
