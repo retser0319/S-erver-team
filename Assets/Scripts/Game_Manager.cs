@@ -40,7 +40,24 @@ public class Game_Manager : MonoBehaviour
         else if (p == 2) P2_Coin += coin;
         else if (p == 3) P3_Coin += coin;
     }
-
+    public void GiveCoin(int p)
+    {
+        if (GameClient.LocalPlayerId == 1 && P1_Coin >= 1)
+        {
+            P1_Coin -= 1;
+            AddCoin(p, 1);
+        }
+        if (GameClient.LocalPlayerId == 2 && P2_Coin >= 1)
+        {
+            P1_Coin -= 1;
+            AddCoin(p, 1);
+        }
+        if (GameClient.LocalPlayerId == 3 && P3_Coin >= 1)
+        {
+            P1_Coin -= 1;
+            AddCoin(p, 1);
+        }
+    }
     public void CreateRandomTower()
     {
         if (GameClient.LocalPlayerId == 1 && P1_Coin >= 5) P1_Coin -= 5;

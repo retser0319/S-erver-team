@@ -1,0 +1,15 @@
+C:\Project\S-erver-team\Server\bin\Debug\net8.0\Program.exe
+C:\Project\S-erver-team\Server\bin\Debug\net8.0\Program.deps.json
+C:\Project\S-erver-team\Server\bin\Debug\net8.0\Program.runtimeconfig.json
+C:\Project\S-erver-team\Server\bin\Debug\net8.0\Program.dll
+C:\Project\S-erver-team\Server\bin\Debug\net8.0\Program.pdb
+C:\Project\S-erver-team\Server\obj\Debug\net8.0\Program.GeneratedMSBuildEditorConfig.editorconfig
+C:\Project\S-erver-team\Server\obj\Debug\net8.0\Program.AssemblyInfoInputs.cache
+C:\Project\S-erver-team\Server\obj\Debug\net8.0\Program.AssemblyInfo.cs
+C:\Project\S-erver-team\Server\obj\Debug\net8.0\Program.csproj.CoreCompileInputs.cache
+C:\Project\S-erver-team\Server\obj\Debug\net8.0\Program.sourcelink.json
+C:\Project\S-erver-team\Server\obj\Debug\net8.0\Program.dll
+C:\Project\S-erver-team\Server\obj\Debug\net8.0\refint\Program.dll
+C:\Project\S-erver-team\Server\obj\Debug\net8.0\Program.pdb
+C:\Project\S-erver-team\Server\obj\Debug\net8.0\Program.genruntimeconfig.cache
+C:\Project\S-erver-team\Server\obj\Debug\net8.0\ref\Program.dll

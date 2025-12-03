@@ -45,7 +45,7 @@ public class GameClient : MonoBehaviour
 
     void Start()
     {
-        ConnectToServer("192.168.0.8", 9000); 
+        ConnectToServer("127.0.0.1", 9000); 
     }
 
     void ConnectToServer(string ip, int port)
